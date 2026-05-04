@@ -69,6 +69,3 @@ The complete architectural documentation has been modularized for readability:
 3. [AI & ML Inference Engine](./docs/03-ai-inference-engine.md) — GPU Compute, Transformer Architecture, Quantization, and AMP.
 4. [Graphics & UI Framework](./docs/04-graphics-and-ui.md) — Compositor, Obsidian/Atticus Design Systems, and App Framework.
 5. [Proof Matrix & Benchmarks](./docs/05-proof-matrix-and-benchmarks.md) — Hard telemetry data verifying end-to-end execution on physical hardware.
-```
-
----
