@@ -24,7 +24,7 @@ AetherOS operates entirely in Ring 0, eliminating syscall overhead for AI worklo
 │                        USER INTERFACE                           │
 │  ┌──────────┐ ┌─────────┐ ┌──────────┐ ┌──────────┐             │
 │  │ Desktop  │ │ Neural  │ │ Pipeline │ │ Settings │  ...        │
-│  │ (Obsidi) │ │ Dashboard│ │ (AI Chat)│ │         │             │
+│  │ (Obsidi) │ │ Dashboard││ (AI Chat)│ │          │             │
 │  └────┬─────┘ └────┬────┘ └────┬─────┘ └────┬─────┘             │
 │       └────────────┴───────────┴────────────┘                   │
 │                        │                                        │
