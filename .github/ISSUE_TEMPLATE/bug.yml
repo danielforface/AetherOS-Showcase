@@ -1,0 +1,34 @@
+name: Documentation problem
+about: Report incorrect, stale, contradictory, or broken public documentation
+title: "[docs] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for helping keep the AetherOS public technical record precise."
+  - type: input
+    id: location
+    attributes:
+      label: Document / section
+      placeholder: "README.md — Current performance lineage"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is incorrect, stale, ambiguous, or broken?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or proposed correction
+      description: Include a source or reasoning if the change affects a factual claim.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public disclosure check
+      options:
+        - label: This report does not include private kernel source, credentials, or sensitive vulnerability details.
+          required: true

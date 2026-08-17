@@ -1,0 +1,16 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# Local drafts / private evidence
+private/
+local-notes/
+*.log
+AETHLOG*.TXT
+ROUND*_PACKAGE/
+
+.aetheros-showcase-backup-*
+
+.aetheros-showcase-backup-*

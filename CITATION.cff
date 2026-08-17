@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use AetherOS architecture, benchmark data, or system-design material, please cite this repository."
+title: "AetherOS: Bare-Metal AI Operating System & Inference Engine — Silicon Sovereign"
+type: software
+authors:
+  - family-names: "Cohen"
+    given-names: "Daniel"
+repository-code: "https://github.com/danielforface/AetherOS-Showcase"
+url: "https://github.com/danielforface/AetherOS-Showcase"
+version: "0.3.0"
+date-released: "2026-08-18"
+abstract: >-
+  AetherOS is a Rust-first x86_64 bare-metal AI operating system / unikernel
+  exploring direct Intel Gen9 GPGPU and AVX2 multi-core transformer inference,
+  deterministic execution, hardware-level observability, and evidence-backed
+  optimization on physical Intel Comet Lake hardware.
+keywords:
+  - bare-metal
+  - operating-system
+  - artificial-intelligence
+  - llm
+  - inference
+  - rust
+  - x86-64
+  - intel-gen9
+  - gpu
+  - avx2
