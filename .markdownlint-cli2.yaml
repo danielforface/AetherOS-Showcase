@@ -1,0 +1,9 @@
+config:
+  default: true
+  MD013: false
+  MD033: false
+  MD041: true
+globs:
+  - "**/*.md"
+ignores:
+  - "docs/99-complete-system-reference.md"

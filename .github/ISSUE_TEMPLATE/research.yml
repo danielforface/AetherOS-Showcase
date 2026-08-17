@@ -1,0 +1,29 @@
+name: Architecture / research discussion
+about: Discuss inference architecture, Gen9, AVX2, validation, or benchmark methodology
+title: "[research] "
+labels: []
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question / hypothesis
+      description: State the technical question precisely.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Relevant AetherOS context
+      description: Link the relevant document or benchmark.
+  - type: textarea
+    id: analysis
+    attributes:
+      label: Analysis / evidence
+      description: Include measurements, references, or a concrete architectural argument where possible.
+  - type: checkboxes
+    id: classification
+    attributes:
+      label: Claim handling
+      options:
+        - label: I understand experimental ideas should not be rewritten as HW-VERIFIED or production claims without evidence.
+          required: true
