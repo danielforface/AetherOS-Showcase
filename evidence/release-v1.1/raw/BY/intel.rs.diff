@@ -1,0 +1,652 @@
+--- baseline/intel.rs
++++ patched/intel.rs
+@@ -7683,6 +7683,13 @@
+ // reused unchanged. A second barrier prevents early overwrite of the shared
+ // tile before every thread has completed its four rows.
+ fn round18be_emit_slm_tile_to_input_grfs(asm: &mut Gen9Assembler) {
++    // ROUND18BY: each OWord response contributes exactly four DWORDs to one
++    // arithmetic input GRF.  The legacy broadcast helper is SIMD8 and, for
++    // dst_sub > 0, wraps into the next GRF.  All internal wraps are later
++    // overwritten, but the final r109.3 write escapes into live accumulator
++    // r110.0..2.  Use exact SIMD1 copies for the four architecturally consumed
++    // DWORDs only.  The Q4 arithmetic terminates each vector with the proven
++    // horizontal_sum_4lane reduction, so lanes 4..7 are intentionally dead.
+     for segment in 0..8u32 {
+         asm.emit_mov_imm32(43, segment * 128);
+         for chunk in 0..4u32 {
+@@ -7693,10 +7700,10 @@
+             let low = 46 + input_pair;
+             let high = low + 1;
+             for lane in 0..4u32 {
+-                asm.emit_mov_grf_scalar(low, lane, 32, lane);
++                asm.emit_mov_grf_ud_scalar_exact(low, lane, 32, lane);
+             }
+             for lane in 0..4u32 {
+-                asm.emit_mov_grf_scalar(high, lane, 32, lane + 4);
++                asm.emit_mov_grf_ud_scalar_exact(high, lane, 32, lane + 4);
+             }
+         }
+     }
+@@ -38592,14 +38599,18 @@
+         4 => build_round18bw_slm_rotate4_fence_isolated_kernel(false),
+         5 => build_round18bw_slm_rotate4_fence_isolated_kernel(true),
+         6..=11 => build_round18bx_slm_rotate4_scoreboard_kernel(variant),
+-        _ => build_round18bx_slm_rotate4_scoreboard_kernel(11),
++        12 => build_round18by_reconstruction_footprint_kernel(false),
++        13 => build_round18by_reconstruction_footprint_kernel(true),
++        14 => build_round18by_slm_rotate4_kernel(false),
++        15 => build_round18by_slm_rotate4_kernel(true),
++        _ => build_round18by_slm_rotate4_kernel(true),
+     }
+ }
+ 
+ fn round18bv_install_variant(variant: u32) -> bool {
+     // ROUND18BW extends the diagnostic resident-slot variants to 4/5 while
+     // preserving BV variants 0..3 byte-for-byte.
+-    let variant = variant.min(11);
++    let variant = variant.min(15);
+     if ROUND18BV_INSTALLED_VARIANT.load(Ordering::Acquire) == variant {
+         return true;
+     }
+@@ -40341,3 +40352,601 @@
+     round18bx_summary(request_id)
+ }
+ 
++
++
++// ============================================================================
++// ROUND18BY: SLM RECONSTRUCTION WRITE-FOOTPRINT REPAIR
++// ============================================================================
++//
++// BX proved that delay/retirement/scoreboard manipulations do not repair the
++// deterministic row-0 failure.  Source audit then found an architectural write
++// footprint bug in the historical SLM reconstruction helper: emit_mov_grf_scalar
++// is a SIMD8 broadcast.  With dst_sub=1/2/3 it wraps into the following GRF.
++// Internal wraps are overwritten by subsequent reconstruction writes; the last
++// high-half write targets r109.3 and escapes into r110.0..2.  r110.0 is the
++// live ROTATE4 accumulator, so every K tile replaces row0's partial sum with
++// tile[255] before row0 arithmetic.
++//
++// The canonical helper above is repaired locally with exact SIMD1 UD copies.
++// The global broadcast helper is intentionally NOT changed because SEND header
++// construction and other call sites depend on its broadcast semantics.
++//
++// Stage 0 is causal, not merely a corrected A/B:
++//   * footprint UNSAFE: r110 sentinel must be destroyed and become tile[255]
++//   * footprint EXACT:  r110 sentinel must survive reconstruction
++//   * full UNSAFE:      mismatch bitmap must be exactly row%4==0 (2048 rows)
++//   * full EXACT:       all 8192 rows must match FACTORED bit-for-bit
++// Only that complete signature sets root_proven and unlocks Requests 2..4.
++
++const ROUND18BY_VARIANT_FOOTPRINT_UNSAFE: u32 = 12;
++const ROUND18BY_VARIANT_FOOTPRINT_EXACT: u32 = 13;
++const ROUND18BY_VARIANT_FULL_UNSAFE: u32 = 14;
++const ROUND18BY_VARIANT_FULL_EXACT: u32 = 15;
++const ROUND18BY_SENTINEL: u32 = 0xA18B_18B1;
++const ROUND18BY_FOOTPRINT_THREADS: usize =
++    (ROUND18BV_GROUPS as usize) * (ROUND18BV_THREADS_PER_GROUP as usize);
++
++static ROUND18BY_QUALIFIED_MASK: AtomicU32 = AtomicU32::new(0);
++static ROUND18BY_ROOT_PROVEN: AtomicU32 = AtomicU32::new(0);
++static ROUND18BY_RUNS: AtomicU32 = AtomicU32::new(0);
++static ROUND18BY_FAILURES: AtomicU32 = AtomicU32::new(0);
++static ROUND18BY_BIT_CHECKS: AtomicU64 = AtomicU64::new(0);
++static ROUND18BY_PERF_1P10: AtomicU32 = AtomicU32::new(0);
++static ROUND18BY_ARCH_1P50: AtomicU32 = AtomicU32::new(0);
++
++/// Frozen pre-BY reconstruction used only by the stage-0 causal controls.
++/// Do not use this helper in a repaired candidate.
++fn round18by_emit_slm_tile_to_input_grfs_unsafe_legacy(asm: &mut Gen9Assembler) {
++    for segment in 0..8u32 {
++        asm.emit_mov_imm32(43, segment * 128);
++        for chunk in 0..4u32 {
++            round18ax_emit_slm_addresses(asm, 24, 43, chunk);
++            asm.emit_send_read_slm_simd8_ay(32, 24, true);
++
++            let input_pair = segment * 8 + chunk * 2;
++            let low = 46 + input_pair;
++            let high = low + 1;
++            for lane in 0..4u32 {
++                asm.emit_mov_grf_scalar(low, lane, 32, lane);
++            }
++            for lane in 0..4u32 {
++                asm.emit_mov_grf_scalar(high, lane, 32, lane + 4);
++            }
++        }
++    }
++}
++
++fn round18by_emit_shared_tile_publish(asm: &mut Gen9Assembler) {
++    // Same qualified cooperative activation producer as BU/BX.
++    asm.emit_shl_ud_imm(43, 39, 3);
++    asm.emit_add_ud_scalar(43, 0, 14, 0, 43, 0);
++    asm.emit_mov_grf_ud(2, 0);
++    asm.emit_mov_grf_scalar(2, 2, 43, 0);
++    asm.emit_send_read_oword_igc_parity(10, 16, 2, 1, 8, 4, true, true);
++    for grf in 16..20u32 {
++        asm.emit_mov_grf_ud(grf, grf);
++    }
++    asm.emit_shl_ud_imm(43, 39, 7);
++    for chunk in 0..4u32 {
++        round18ax_emit_slm_addresses(asm, 24, 43, chunk);
++        asm.emit_mov_grf_ud(25, 16 + chunk);
++        asm.emit_send_write_slm_simd8_ay(24, true);
++    }
++    // Keep BW's isolated fence destination for both controls and repaired path;
++    // BW already proved that r30->r126 alone does not affect correctness.
++    round18bw_emit_regular_barrier_isolated(asm, false);
++}
++
++fn build_round18by_reconstruction_footprint_kernel(
++    exact: bool,
++) -> alloc::vec::Vec<u32> {
++    let mut asm = Gen9Assembler::new();
++    round18bv_emit_global_row_and_local(&mut asm);
++    asm.emit_mov_imm32(14, 0); // first/only 1 KiB activation tile
++    asm.emit_mov_imm32_scalar(110, 0, ROUND18BY_SENTINEL);
++
++    round18by_emit_shared_tile_publish(&mut asm);
++    if exact {
++        round18be_emit_slm_tile_to_input_grfs(&mut asm);
++    } else {
++        round18by_emit_slm_tile_to_input_grfs_unsafe_legacy(&mut asm);
++    }
++
++    // One OWord per hardware thread.  CPU checks raw bits:
++    //   lane0 = observed r110.0 after reconstruction
++    //   lane1 = sentinel constant
++    //   lane2 = reconstructed tile[255] = r109.3 (four-DWord OWord layout)
++    //   lane3 = dense thread slot (group*8+local)
++    asm.emit_mov_imm32(124, 0);
++    asm.emit_mov_grf_ud_scalar_exact(124, 0, 110, 0);
++    asm.emit_mov_imm32_scalar(124, 1, ROUND18BY_SENTINEL);
++    asm.emit_mov_grf_ud_scalar_exact(124, 2, 109, 3);
++    round18bv_emit_dense_slot(&mut asm, 42);
++    asm.emit_mov_grf_ud_scalar_exact(124, 3, 42, 0);
++    round18bv_emit_dense_write_and_drain(&mut asm, 42, 124);
++    asm.emit_thread_end();
++    asm.code
++}
++
++fn build_round18by_slm_rotate4_kernel(
++    exact: bool,
++) -> alloc::vec::Vec<u32> {
++    let mut asm = Gen9Assembler::new();
++    round18bv_emit_global_row_and_local(&mut asm);
++
++    asm.emit_mov_imm32(2, Q4K_CONTROL_OWORD);
++    asm.emit_send_read_dc0(111, 2, 3, 1);
++    asm.emit_mov_grf_f32(111, 111);
++    asm.emit_mov_grf_scalar(117, 0, 111, 0);
++    asm.emit_mov_imm32(14, 0);
++    asm.emit_mov_imm32(45, 0);
++    asm.emit_clear_flags(15);
++
++    asm.emit_mov_f32_imm(110, 0);
++    asm.emit_mov_f32_imm(120, 0);
++    asm.emit_mov_f32_imm(121, 0);
++    asm.emit_mov_f32_imm(122, 0);
++
++    let block_loop_top = asm.instruction_count();
++    round18by_emit_shared_tile_publish(&mut asm);
++    if exact {
++        round18be_emit_slm_tile_to_input_grfs(&mut asm);
++    } else {
++        round18by_emit_slm_tile_to_input_grfs_unsafe_legacy(&mut asm);
++    }
++
++    asm.emit_mov_grf_scalar(41, 0, 40, 0);
++    asm.emit_mov_imm32(42, 4);
++    let row_loop_top = asm.instruction_count();
++
++    round18br_issue_row_weight_reads(&mut asm, 41, 15, 24, 13);
++    round18br_wait_row_metadata(&mut asm, 15);
++    round18ar_emit_row_arithmetic(&mut asm, 110, 15, 24);
++    round18bt_rotate_live_accumulators(&mut asm);
++
++    asm.emit_add_ud_imm(41, 41, 1);
++    asm.emit_add_ud_imm_condmod_nz(42, 42, (-1i32) as u32);
++    let row_loop_len = asm.instruction_count() - row_loop_top;
++    asm.emit_jmpi_f0(-(row_loop_len as i32));
++
++    round18bw_emit_regular_barrier_isolated(&mut asm, false);
++    asm.emit_add_ud_imm(14, 14, 64);
++    asm.emit_add_ud_imm(45, 45, 9);
++    asm.emit_add_ud_imm_condmod_nz(117, 117, (-1i32) as u32);
++    let block_loop_len = asm.instruction_count() - block_loop_top;
++    asm.emit_jmpi_f0(-(block_loop_len as i32));
++
++    asm.emit_mov_imm32(124, 0);
++    asm.emit_mov_grf_ud_scalar_exact(124, 0, 110, 0);
++    asm.emit_mov_grf_ud_scalar_exact(124, 1, 120, 0);
++    asm.emit_mov_grf_ud_scalar_exact(124, 2, 121, 0);
++    asm.emit_mov_grf_ud_scalar_exact(124, 3, 122, 0);
++    round18bv_emit_dense_slot(&mut asm, 42);
++    round18bv_emit_dense_write_and_drain(&mut asm, 42, 124);
++    asm.emit_thread_end();
++    asm.code
++}
++
++#[derive(Clone, Copy)]
++struct Round18byFullProbe {
++    completed: bool,
++    exact: bool,
++    clean: bool,
++    cycles: u64,
++    mismatches: u32,
++    mod4: [u32; 4],
++    first_mismatch: u32,
++    expected_bits: u32,
++    actual_bits: u32,
++}
++
++fn round18by_probe_full(
++    weight_virt: u64,
++    input: &[f32],
++    variant: u32,
++    control: &[f32],
++) -> Round18byFullProbe {
++    let mut candidate = alloc::vec![0.0f32; ROUND18BV_DIM_M];
++    let fault_before = GPU_FAULT_COUNT.load(Ordering::Relaxed);
++    let recovery_before = GPU_RECOVERY_COUNT.load(Ordering::Relaxed);
++    ROUND18BV_INSTALLED_VARIANT.store(u32::MAX, Ordering::Release);
++    let d = round18bv_dispatch_variant_once(variant, weight_virt, input, &mut candidate);
++    let restore = round18az_restore_l3_production();
++    let completed = d.outcome == GpuDispatchOutcome::Completed;
++    let clean = completed
++        && d.guard_clean
++        && d.l3_slm_exact
++        && restore
++        && GPU_FAULT_COUNT.load(Ordering::Relaxed) == fault_before
++        && GPU_RECOVERY_COUNT.load(Ordering::Relaxed) == recovery_before;
++
++    let mut mismatches = 0u32;
++    let mut mod4 = [0u32; 4];
++    let mut first = u32::MAX;
++    let mut expected = 0u32;
++    let mut actual = 0u32;
++    for row in 0..ROUND18BV_DIM_M {
++        let e = control[row].to_bits();
++        let a = candidate[row].to_bits();
++        if e != a {
++            mismatches += 1;
++            mod4[row & 3] += 1;
++            if first == u32::MAX {
++                first = row as u32;
++                expected = e;
++                actual = a;
++            }
++        }
++    }
++    Round18byFullProbe {
++        completed,
++        exact: clean && mismatches == 0,
++        clean,
++        cycles: d.cycles,
++        mismatches,
++        mod4,
++        first_mismatch: first,
++        expected_bits: expected,
++        actual_bits: actual,
++    }
++}
++
++#[derive(Clone, Copy)]
++struct Round18byFootprintProbe {
++    completed: bool,
++    clean: bool,
++    cycles: u64,
++    observed_sentinel: u32,
++    observed_tile255: u32,
++    lane1_sentinel: u32,
++    lane2_tile255: u32,
++    slot_exact: u32,
++    ambiguous: bool,
++}
++
++fn round18by_probe_footprint(
++    weight_virt: u64,
++    input: &[f32],
++    variant: u32,
++) -> Round18byFootprintProbe {
++    let mut output = alloc::vec![0.0f32; ROUND18BV_DIM_M];
++    let fault_before = GPU_FAULT_COUNT.load(Ordering::Relaxed);
++    let recovery_before = GPU_RECOVERY_COUNT.load(Ordering::Relaxed);
++    ROUND18BV_INSTALLED_VARIANT.store(u32::MAX, Ordering::Release);
++    let d = round18bv_dispatch_variant_once(variant, weight_virt, input, &mut output);
++    let restore = round18az_restore_l3_production();
++    let completed = d.outcome == GpuDispatchOutcome::Completed;
++    let clean = completed
++        && d.guard_clean
++        && d.l3_slm_exact
++        && restore
++        && GPU_FAULT_COUNT.load(Ordering::Relaxed) == fault_before
++        && GPU_RECOVERY_COUNT.load(Ordering::Relaxed) == recovery_before;
++
++    let tile255 = input[255].to_bits();
++    let ambiguous = tile255 == ROUND18BY_SENTINEL;
++    let mut observed_sentinel = 0u32;
++    let mut observed_tile255 = 0u32;
++    let mut lane1_sentinel = 0u32;
++    let mut lane2_tile255 = 0u32;
++    let mut slot_exact = 0u32;
++    for slot in 0..ROUND18BY_FOOTPRINT_THREADS {
++        let base = slot * 4;
++        let observed = output[base].to_bits();
++        observed_sentinel += (observed == ROUND18BY_SENTINEL) as u32;
++        observed_tile255 += (observed == tile255) as u32;
++        lane1_sentinel += (output[base + 1].to_bits() == ROUND18BY_SENTINEL) as u32;
++        lane2_tile255 += (output[base + 2].to_bits() == tile255) as u32;
++        slot_exact += (output[base + 3].to_bits() == slot as u32) as u32;
++    }
++    Round18byFootprintProbe {
++        completed,
++        clean,
++        cycles: d.cycles,
++        observed_sentinel,
++        observed_tile255,
++        lane1_sentinel,
++        lane2_tile255,
++        slot_exact,
++        ambiguous,
++    }
++}
++
++fn round18by_stage0_causal(
++    weight_virt: u64,
++    input: &[f32],
++) -> bool {
++    let mut control = alloc::vec![0.0f32; ROUND18BV_DIM_M];
++    let b = q4k_run_timed_mode(
++        weight_virt as *const u8,
++        ROUND18BV_DIM_M as u32,
++        ROUND18BV_DIM_K as u32,
++        input,
++        &mut control,
++        4,
++        1,
++    );
++    if b.0 != GpuDispatchOutcome::Completed {
++        ROUND18BY_FAILURES.fetch_add(1, Ordering::Relaxed);
++        return false;
++    }
++
++    let unsafe_fp = round18by_probe_footprint(
++        weight_virt, input, ROUND18BY_VARIANT_FOOTPRINT_UNSAFE);
++    let exact_fp = round18by_probe_footprint(
++        weight_virt, input, ROUND18BY_VARIANT_FOOTPRINT_EXACT);
++    ROUND18BY_RUNS.fetch_add(2, Ordering::Relaxed);
++    ROUND18BY_BIT_CHECKS.fetch_add((ROUND18BY_FOOTPRINT_THREADS as u64) * 8, Ordering::Relaxed);
++
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-FOOTPRINT] mode=UNSAFE completed={} clean={} cycles={} threads={} observed_sentinel={} observed_tile255={} lane1_sentinel={} lane2_tile255={} slot_exact={} tile255=0x{:08x} sentinel=0x{:08x} ambiguous={}\n",
++        unsafe_fp.completed as u8, unsafe_fp.clean as u8, unsafe_fp.cycles,
++        ROUND18BY_FOOTPRINT_THREADS, unsafe_fp.observed_sentinel,
++        unsafe_fp.observed_tile255, unsafe_fp.lane1_sentinel,
++        unsafe_fp.lane2_tile255, unsafe_fp.slot_exact, input[255].to_bits(),
++        ROUND18BY_SENTINEL, unsafe_fp.ambiguous as u8));
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-FOOTPRINT] mode=EXACT completed={} clean={} cycles={} threads={} observed_sentinel={} observed_tile255={} lane1_sentinel={} lane2_tile255={} slot_exact={} tile255=0x{:08x} sentinel=0x{:08x} ambiguous={}\n",
++        exact_fp.completed as u8, exact_fp.clean as u8, exact_fp.cycles,
++        ROUND18BY_FOOTPRINT_THREADS, exact_fp.observed_sentinel,
++        exact_fp.observed_tile255, exact_fp.lane1_sentinel,
++        exact_fp.lane2_tile255, exact_fp.slot_exact, input[255].to_bits(),
++        ROUND18BY_SENTINEL, exact_fp.ambiguous as u8));
++
++    let footprint_signature = !unsafe_fp.ambiguous
++        && unsafe_fp.completed && unsafe_fp.clean
++        && exact_fp.completed && exact_fp.clean
++        && unsafe_fp.observed_sentinel == 0
++        && unsafe_fp.observed_tile255 == ROUND18BY_FOOTPRINT_THREADS as u32
++        && exact_fp.observed_sentinel == ROUND18BY_FOOTPRINT_THREADS as u32
++        && exact_fp.observed_tile255 == 0
++        && unsafe_fp.lane1_sentinel == ROUND18BY_FOOTPRINT_THREADS as u32
++        && exact_fp.lane1_sentinel == ROUND18BY_FOOTPRINT_THREADS as u32
++        && unsafe_fp.lane2_tile255 == ROUND18BY_FOOTPRINT_THREADS as u32
++        && exact_fp.lane2_tile255 == ROUND18BY_FOOTPRINT_THREADS as u32
++        && unsafe_fp.slot_exact == ROUND18BY_FOOTPRINT_THREADS as u32
++        && exact_fp.slot_exact == ROUND18BY_FOOTPRINT_THREADS as u32;
++
++    let unsafe_full = round18by_probe_full(
++        weight_virt, input, ROUND18BY_VARIANT_FULL_UNSAFE, &control);
++    let exact_full = round18by_probe_full(
++        weight_virt, input, ROUND18BY_VARIANT_FULL_EXACT, &control);
++    ROUND18BY_RUNS.fetch_add(2, Ordering::Relaxed);
++    ROUND18BY_BIT_CHECKS.fetch_add((ROUND18BV_DIM_M as u64) * 2, Ordering::Relaxed);
++
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-BITMAP] mode=UNSAFE completed={} clean={} exact={} cycles={} mismatches={} mod0={} mod1={} mod2={} mod3={} first={} expected=0x{:08x} actual=0x{:08x}\n",
++        unsafe_full.completed as u8, unsafe_full.clean as u8, unsafe_full.exact as u8,
++        unsafe_full.cycles, unsafe_full.mismatches, unsafe_full.mod4[0],
++        unsafe_full.mod4[1], unsafe_full.mod4[2], unsafe_full.mod4[3],
++        unsafe_full.first_mismatch, unsafe_full.expected_bits, unsafe_full.actual_bits));
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-BITMAP] mode=EXACT completed={} clean={} exact={} cycles={} mismatches={} mod0={} mod1={} mod2={} mod3={} first={} expected=0x{:08x} actual=0x{:08x}\n",
++        exact_full.completed as u8, exact_full.clean as u8, exact_full.exact as u8,
++        exact_full.cycles, exact_full.mismatches, exact_full.mod4[0],
++        exact_full.mod4[1], exact_full.mod4[2], exact_full.mod4[3],
++        exact_full.first_mismatch, exact_full.expected_bits, exact_full.actual_bits));
++
++    let bitmap_signature = unsafe_full.completed && unsafe_full.clean
++        && !unsafe_full.exact
++        && unsafe_full.mismatches == 2048
++        && unsafe_full.mod4[0] == 2048
++        && unsafe_full.mod4[1] == 0
++        && unsafe_full.mod4[2] == 0
++        && unsafe_full.mod4[3] == 0
++        && unsafe_full.first_mismatch == 0;
++    let fixed_signature = exact_full.completed && exact_full.clean
++        && exact_full.exact && exact_full.mismatches == 0;
++    let root_proven = footprint_signature && bitmap_signature && fixed_signature;
++    ROUND18BY_ROOT_PROVEN.store(root_proven as u32, Ordering::Release);
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-CAUSAL] footprint_signature={} bitmap_signature={} fixed_signature={} root_proven={} control_cycles={} unsafe_cycles={} exact_cycles={} repair=SIMD1_EXACT_RECONSTRUCTION legacy_helper_global_change=0 promoted=0\n",
++        footprint_signature as u8, bitmap_signature as u8, fixed_signature as u8,
++        root_proven as u8, b.1, unsafe_full.cycles, exact_full.cycles));
++    if !root_proven {
++        ROUND18BY_FAILURES.fetch_add(1, Ordering::Relaxed);
++    }
++    root_proven
++}
++
++fn round18by_run_pair(
++    weight_virt: u64,
++    input: &[f32],
++    candidate_first: bool,
++) -> Round18bwPairResult {
++    let saved = ROUND18BW_SELECTED_VARIANT.load(Ordering::Acquire);
++    ROUND18BW_SELECTED_VARIANT.store(ROUND18BY_VARIANT_FULL_EXACT, Ordering::Release);
++    let r = round18bw_run_pair(weight_virt, input, candidate_first);
++    ROUND18BW_SELECTED_VARIANT.store(saved, Ordering::Release);
++    r
++}
++
++fn round18by_mode(stage: u32) -> &'static str {
++    match stage {
++        0 => "SLM_RECONSTRUCTION_WRITE_FOOTPRINT_CAUSAL",
++        1 => "REPAIRED_GATE_UP_QUALIFICATION",
++        2 => "REPAIRED_PATTERN_SWEEP",
++        _ => "REPAIRED_ENDURANCE_PERFORMANCE",
++    }
++}
++
++fn round18by_target(stage: u32) -> u32 {
++    match stage { 1 => 8, 2 => 16, _ => 32 }
++}
++
++fn round18by_next(mask: u32) -> &'static str {
++    if ROUND18BY_ROOT_PROVEN.load(Ordering::Acquire) == 0 {
++        "COOPERATIVE_Q4_RECONSTRUCTION_FOOTPRINT_DEEP_TRACE"
++    } else if mask != 0xF {
++        "COOPERATIVE_Q4_RECONSTRUCTION_REPAIR_QUALIFICATION"
++    } else if ROUND18BY_ARCH_1P50.load(Ordering::Acquire) != 0 {
++        "COOPERATIVE_Q4_EXECUTION_PACK_AND_OCCUPANCY"
++    } else {
++        "COOPERATIVE_Q4_EXECUTION_PACK_REQUIRED"
++    }
++}
++
++fn round18by_summary(request_id: u32) -> u32 {
++    let mask = ROUND18BY_QUALIFIED_MASK.load(Ordering::Acquire);
++    let perf = ROUND18BY_PERF_1P10.load(Ordering::Acquire);
++    let arch = ROUND18BY_ARCH_1P50.load(Ordering::Acquire);
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-SUM] request={} mask=0x{:x} root_proven={} runs={} failures={} bit_checks={} perf_1p10={} architecture_1p50={} production=DUAL_WALKER_FLUSH promoted=0\n",
++        request_id, mask, ROUND18BY_ROOT_PROVEN.load(Ordering::Acquire),
++        ROUND18BY_RUNS.load(Ordering::Relaxed), ROUND18BY_FAILURES.load(Ordering::Relaxed),
++        ROUND18BY_BIT_CHECKS.load(Ordering::Relaxed), perf, arch));
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-STAGE] request={} root_proven={} correctness_mask=0x{:x} perf_1p10={} architecture_1p50={} power_qualified=0 promoted=0 next={}\n",
++        request_id, ROUND18BY_ROOT_PROVEN.load(Ordering::Acquire), mask, perf, arch,
++        round18by_next(mask)));
++    mask
++}
++
++pub fn run_round18by_cooperative_q4_slm_reconstruction_repair(
++    request_id: u32,
++) -> u32 {
++    if request_id == 0 || request_id > 4 {
++        return ROUND18BY_QUALIFIED_MASK.load(Ordering::Acquire);
++    }
++    let Some(capture) = ROUND18BM_CAPTURE.lock().clone() else {
++        crate::serial::print_args(core::format_args!(
++            "[Q4K-BY-LAB] request={} capture=0 skipped=1\n", request_id));
++        return round18by_summary(request_id);
++    };
++    if capture.input.len() < ROUND18BV_DIM_K
++        || capture.gate_weight_virt == 0
++        || capture.up_weight_virt == 0
++        || capture.gate_weight_virt == capture.up_weight_virt
++    {
++        ROUND18BY_FAILURES.fetch_add(1, Ordering::Relaxed);
++        return round18by_summary(request_id);
++    }
++
++    let stage = request_id - 1;
++    let required = (1u32 << stage).wrapping_sub(1);
++    let before = ROUND18BY_QUALIFIED_MASK.load(Ordering::Acquire);
++    if (before & required) != required {
++        crate::serial::print_args(core::format_args!(
++            "[Q4K-BY-LAB] request={} stage={} mode={} skipped=1 required=0x{:x} mask=0x{:x}\n",
++            request_id, stage, round18by_mode(stage), required, before));
++        return round18by_summary(request_id);
++    }
++
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-LAB] request={} stage={} mode={} shape=8192x2048 groups=256 threads_per_group=8 repair=SIMD1_EXACT_RECONSTRUCTION production_unchanged=1\n",
++        request_id, stage, round18by_mode(stage)));
++
++    if stage == 0 {
++        if round18by_stage0_causal(capture.gate_weight_virt, &capture.input) {
++            ROUND18BY_QUALIFIED_MASK.fetch_or(1, Ordering::AcqRel);
++        }
++        return round18by_summary(request_id);
++    }
++
++    let target = round18by_target(stage);
++    let mut b = alloc::vec::Vec::<u64>::with_capacity(target as usize);
++    let mut c = alloc::vec::Vec::<u64>::with_capacity(target as usize);
++    let mut b_bc = alloc::vec::Vec::<u64>::new();
++    let mut c_bc = alloc::vec::Vec::<u64>::new();
++    let mut b_cb = alloc::vec::Vec::<u64>::new();
++    let mut c_cb = alloc::vec::Vec::<u64>::new();
++    let mut exact_runs = 0u32;
++    let mut completed_runs = 0u32;
++    let mut all_clean = true;
++    let mut first = u32::MAX;
++    let mut expected = 0u32;
++    let mut actual = 0u32;
++
++    for run in 0..target {
++        let use_up = ((run / 2) & 1) != 0;
++        let weight_virt = if use_up { capture.up_weight_virt } else { capture.gate_weight_virt };
++        let pattern = if stage < 2 { 0 } else { run & 7 };
++        let input = round18bu_input_pattern(&capture.input, pattern);
++        let candidate_first = (run & 1) != 0;
++        let r = round18by_run_pair(weight_virt, &input, candidate_first);
++        ROUND18BY_RUNS.fetch_add(1, Ordering::Relaxed);
++        ROUND18BY_BIT_CHECKS.fetch_add(ROUND18BV_DIM_M as u64, Ordering::Relaxed);
++        completed_runs += r.completed as u32;
++        exact_runs += r.exact as u32;
++        all_clean &= r.clean;
++        if r.first_mismatch != u32::MAX && first == u32::MAX {
++            first = r.first_mismatch;
++            expected = r.expected_bits;
++            actual = r.actual_bits;
++        }
++        if r.completed {
++            b.push(r.control_cycles); c.push(r.candidate_cycles);
++            if candidate_first {
++                b_cb.push(r.control_cycles); c_cb.push(r.candidate_cycles);
++            } else {
++                b_bc.push(r.control_cycles); c_bc.push(r.candidate_cycles);
++            }
++        }
++        crate::serial::print_args(core::format_args!(
++            "[Q4K-BY-CASE] req={} stage={} run={} matrix={} pattern={} order={} completed={} exact={} clean={} b_cycles={} c_cycles={} mismatch={} expected=0x{:08x} actual=0x{:08x}\n",
++            request_id, stage, run, if use_up { "UP" } else { "GATE" }, pattern,
++            if candidate_first { "C_B" } else { "B_C" }, r.completed as u8,
++            r.exact as u8, r.clean as u8, r.control_cycles, r.candidate_cycles,
++            r.first_mismatch, r.expected_bits, r.actual_bits));
++        if !r.exact { break; }
++    }
++
++    let stats_valid = b.len() == target as usize && c.len() == target as usize
++        && !b_bc.is_empty() && !b_cb.is_empty();
++    let mut bm=b.clone(); let mut cm=c.clone();
++    let mut bt=b.clone(); let mut ct=c.clone();
++    let mut bp=b.clone(); let mut cp=c.clone();
++    let mut bbc=b_bc.clone(); let mut cbc=c_bc.clone();
++    let mut bcb=b_cb.clone(); let mut ccb=c_cb.clone();
++    let b_med=if stats_valid { round18bg_median(&mut bm) } else {0};
++    let c_med=if stats_valid { round18bg_median(&mut cm) } else {0};
++    let b_trim=if stats_valid { round18bg_trimmed_mean(&mut bt) } else {0};
++    let c_trim=if stats_valid { round18bg_trimmed_mean(&mut ct) } else {0};
++    let b_p90=if stats_valid { round18bg_p90(&mut bp) } else {0};
++    let c_p90=if stats_valid { round18bg_p90(&mut cp) } else {0};
++    let b_bc_med=if stats_valid { round18bg_median(&mut bbc) } else {0};
++    let c_bc_med=if stats_valid { round18bg_median(&mut cbc) } else {0};
++    let b_cb_med=if stats_valid { round18bg_median(&mut bcb) } else {0};
++    let c_cb_med=if stats_valid { round18bg_median(&mut ccb) } else {0};
++    let ratio_med=round18bg_ratio(b_med,c_med);
++    let ratio_trim=round18bg_ratio(b_trim,c_trim);
++    let ratio_p90=round18bg_ratio(b_p90,c_p90);
++    let ratio_bc=round18bg_ratio(b_bc_med,c_bc_med);
++    let ratio_cb=round18bg_ratio(b_cb_med,c_cb_med);
++    let order_delta=round18bg_abs_diff(ratio_bc,ratio_cb);
++    let correctness=completed_runs==target && exact_runs==target && all_clean && stats_valid;
++    let perf=correctness && ratio_med>=11_000 && ratio_trim>=11_000
++        && ratio_p90>=10_000 && ratio_bc>=10_000 && ratio_cb>=10_000
++        && order_delta<=500;
++    let arch=correctness && ratio_med>=15_000 && ratio_trim>=15_000
++        && ratio_p90>=10_000 && ratio_bc>=10_000 && ratio_cb>=10_000
++        && order_delta<=500;
++    if correctness {
++        ROUND18BY_QUALIFIED_MASK.fetch_or(1 << stage, Ordering::AcqRel);
++    } else {
++        ROUND18BY_FAILURES.fetch_add(1, Ordering::Relaxed);
++    }
++    if stage == 3 {
++        ROUND18BY_PERF_1P10.store(perf as u32, Ordering::Release);
++        ROUND18BY_ARCH_1P50.store(arch as u32, Ordering::Release);
++    }
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-DIST] request={} stage={} exact_runs={} target={} b_med={} c_med={} ratio_med={} b_trim={} c_trim={} ratio_trim={} ratio_p90={} ratio_bc={} ratio_cb={} order_delta={} stats_valid={}\n",
++        request_id, stage, exact_runs, target, b_med, c_med, ratio_med, b_trim,
++        c_trim, ratio_trim, ratio_p90, ratio_bc, ratio_cb, order_delta,
++        stats_valid as u8));
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-CERT] request={} stage={} attempted={} completed={} exact_runs={} target={} clean={} full_rows=8192 bit_checks={} first_mismatch={} expected=0x{:08x} actual=0x{:08x} result={}\n",
++        request_id, stage, target, completed_runs, exact_runs, target,
++        all_clean as u8, (target as u64)*(ROUND18BV_DIM_M as u64), first,
++        expected, actual, if correctness { "PASS" } else { "FAIL" }));
++    crate::serial::print_args(core::format_args!(
++        "[Q4K-BY-GATE] request={} correctness={} median_1p10={} trimmed_1p10={} median_1p50={} trimmed_1p50={} p90_nonregression={} bc_nonregression={} cb_nonregression={} order_gate={} perf_carry={} architecture_1p50={} power_qualified=0 promoted=0\n",
++        request_id, correctness as u8, (ratio_med>=11_000) as u8,
++        (ratio_trim>=11_000) as u8, (ratio_med>=15_000) as u8,
++        (ratio_trim>=15_000) as u8, (ratio_p90>=10_000) as u8,
++        (ratio_bc>=10_000) as u8, (ratio_cb>=10_000) as u8,
++        (order_delta<=500) as u8, if stage==3 { perf as u8 } else {0},
++        if stage==3 { arch as u8 } else {0}));
++    round18by_summary(request_id)
++}

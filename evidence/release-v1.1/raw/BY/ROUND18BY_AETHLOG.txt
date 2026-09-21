@@ -1,0 +1,1461 @@
+=== AetherOS Kernel Serial Log ===
+Lines: 1456
+---
+[aetheros] logger: kernel log buffer active
+[aetheros] init: double buffer
+[aetheros] gfx: initializing double-buffer for 1920x1080 (8294400 bytes per frame)
+[aetheros] gfx: screen 1920x1080 pitch=7680 bpp=4
+[aetheros] gfx: format=BGR (R@16, G@8, B@0) shifts=(16,8,0)
+[aetheros] gfx: allocating double-buffer from Zone A (8294400 bytes per frame, 15 MiB total)
+[aetheros] gfx: display buffer request: 15 MiB (available: 294 MiB)
+[aetheros] gfx: double-buffer allocation successful
+[aetheros] gfx: double buffering ready - hardware rendering enabled
+[aetheros] gfx: heap stats: attempts=1 success=1 fail=0 rate=100% peak=16588800 current=16588800
+[aetheros] gfx: compositor initialized in Desktop mode
+[global_keys] Initialized: 51 bindings registered
+[text_engine] Initialized: width=1920, scale=2x
+[console] CRYSTAL CLEAR initialized: 1920x1080 @ 2x scale
+[aetheros] gfx: Global Console initialized with HiDPI scaling
+[aetheros] gfx: Command Control initialized
+[aetheros] ui: UI system initialized
+[aetheros] ui: Explorer window created
+[aetheros] ui: Task Manager window created
+[boot-prof] phase0_4_core_init: 324763838 cycles (~162381 us)
+[aetheros] Phase 2: OK
+[aetheros] init: intc
+[aetheros] apic: enabled
+  lapic_base=4276092928
+  ioapic_base=4273995776
+  ioapic_gsi_base=0
+  bsp_apic_id=0
+[aetheros] intc: mode=apic
+[smp] 4 CPU(s) reported by Limine, BSP LAPIC=0
+[smp] Waking AP LAPIC 2 as cpu_index 1...
+[smp] AP LAPIC 2 (cpu_index 1): entered Rust — SSE safe
+[smp] AP LAPIC 2 (cpu_index 1): fully initialised
+[smp] AP LAPIC 2 is online (total 2)
+[smp] Waking AP LAPIC 1 as cpu_index 2...
+[smp] AP LAPIC 1 (cpu_index 2): entered Rust — SSE safe
+[smp] AP LAPIC 1 (cpu_index 2): fully initialised
+[smp] AP LAPIC 1 is online (total 3)
+[smp] Waking AP LAPIC 3 as cpu_index 3...
+[smp] AP LAPIC 3 (cpu_index 3): entered Rust — SSE safe
+[smp] AP LAPIC 3 (cpu_index 3): fully initialised
+[smp] AP LAPIC 3 is online (total 4)
+[smp] Init complete — 4 core(s) online, mask=0xF
+[mouse] PS/2 relative mode initialized
+[mouse] resolution set to 1920x1080
+[aetheros] init: pit
+[aetheros] init: scheduler
+[aetheros] boot info:
+  kernel_addr=18446744071562067968
+  kernel_len=0
+  memory_regions_total=39
+  memory_regions_usable=15
+  heap_vec_len=32
+[aetheros] Phase 3: hal begin
+[aetheros] pci: cfg=legacy-io
+  pci_devices=18
+  pci: device
+    bdf=0
+    vendor=32902
+    device=39793
+    class=6
+    subclass=0
+    prog_if=0
+  pci: device
+    bdf=512
+    vendor=32902
+    device=39745
+    class=3
+    subclass=0
+    prog_if=0
+  pci: device
+    bdf=1024
+    vendor=32902
+    device=6403
+    class=17
+    subclass=128
+    prog_if=0
+  pci: device
+    bdf=2048
+    vendor=32902
+    device=6417
+    class=8
+    subclass=128
+    prog_if=0
+  pci: device
+    bdf=4608
+    vendor=32902
+    device=761
+    class=17
+    subclass=128
+    prog_if=0
+  pci: device
+    bdf=5120
+    vendor=32902
+    device=749
+    class=12
+    subclass=3
+    prog_if=48
+  pci: device
+    bdf=5122
+    vendor=32902
+    device=751
+    class=5
+    subclass=0
+    prog_if=0
+  pci: device
+    bdf=5123
+    vendor=32902
+    device=752
+    class=2
+    subclass=128
+    prog_if=0
+  pci: device
+    bdf=5632
+    vendor=32902
+    device=736
+    class=7
+    subclass=128
+    prog_if=0
+  pci: device
+    bdf=5888
+    vendor=32902
+    device=723
+    class=1
+    subclass=6
+    prog_if=1
+  pci: device
+    bdf=7424
+    vendor=32902
+    device=688
+    class=6
+    subclass=4
+    prog_if=0
+  pci: device
+    bdf=7428
+    vendor=32902
+    device=692
+    class=6
+    subclass=4
+    prog_if=0
+  pci: device
+    bdf=7936
+    vendor=32902
+    device=644
+    class=6
+    subclass=1
+    prog_if=0
+  pci: device
+    bdf=7939
+    vendor=32902
+    device=712
+    class=4
+    subclass=3
+    prog_if=128
+  pci: device
+    bdf=7940
+    vendor=32902
+    device=675
+    class=12
+    subclass=5
+    prog_if=0
+  pci: device
+    bdf=7941
+    vendor=32902
+    device=676
+    class=12
+    subclass=128
+    prog_if=0
+  pci: device
+    bdf=262144
+    vendor=4332
+    device=33128
+    class=2
+    subclass=0
+    prog_if=0
+  pci: device
+    bdf=458752
+    vendor=7695
+    device=1
+    class=1
+    subclass=8
+    prog_if=2
+[aetheros] pci: cfg=legacy-io
+[pci] Hotplug cache initialized with 18 devices (silent watcher active)
+[device-manager] NEXUS: Initializing Industrial Device Manager
+[device-manager] Matched 18 device(s) to drivers
+[device-manager] === UNIVERSAL HANDSHAKE ===
+[device-manager]   00:00.0 8086:9b71 => HostBridge (Host Bridge)
+[device-manager]   00:02.0 8086:9b41 => VgaDisplay (VGA Display)
+[pci] Activate 00:02.0 CMD: 0x0006 -> 0x0406 [BusMaster OK]
+[device-manager]   00:04.0 8086:1903 => Unknown (Unknown Device)
+[device-manager]   00:08.0 8086:1911 => Unknown (Unknown Device)
+[device-manager]   00:12.0 8086:02f9 => Unknown (Unknown Device)
+[device-manager]   00:14.0 8086:02ed => XhciUsb3 (xHCI USB 3.0)
+[pci] Activate 00:14.0 CMD: 0x0006 -> 0x0406 [BusMaster OK]
+[device-manager]   00:14.2 8086:02ef => Unknown (Unknown Device)
+[device-manager]   00:14.3 8086:02f0 => IntelWifi (Intel WiFi)
+[pci] Activate 00:14.3 CMD: 0x0000 -> 0x0406 [BusMaster OK]
+[device-manager]   00:16.0 8086:02e0 => Unknown (Unknown Device)
+[device-manager]   00:17.0 8086:02d3 => Ahci (AHCI/SATA)
+[pci] Activate 00:17.0 CMD: 0x0007 -> 0x0407 [BusMaster OK]
+[device-manager]   00:1d.0 8086:02b0 => PciBridge (PCI-to-PCI Bridge)
+[device-manager]   00:1d.4 8086:02b4 => PciBridge (PCI-to-PCI Bridge)
+[device-manager]   00:1f.0 8086:0284 => IsaBridge (ISA Bridge)
+[device-manager]   00:1f.3 8086:02c8 => IntelHda (HD Audio)
+[pci] Activate 00:1f.3 CMD: 0x0006 -> 0x0406 [BusMaster OK]
+[device-manager]   00:1f.4 8086:02a3 => Smbus (SMBus)
+[device-manager]   00:1f.5 8086:02a4 => Unknown (Unknown Device)
+[device-manager]   04:00.0 10ec:8168 => VirtioNet (Ethernet)
+[pci] Activate 04:00.0 CMD: 0x0007 -> 0x0407 [BusMaster OK]
+[device-manager]   07:00.0 1e0f:0001 => Nvme (NVMe SSD)
+[pci] Activate 07:00.0 CMD: 0x0006 -> 0x0406 [BusMaster OK]
+[device-manager] === HANDSHAKE COMPLETE ===
+[device-manager] NEXUS: Device Manager ready
+[aetheros] init: Device Manager -> init_drivers()
+[device-manager] === DRIVER INJECTION ===
+[device-manager] Injecting xHCI driver for 00:14.0
+[xhci] Direct injection: 00:14.0 VEN=8086 DEV=02ed
+[XRAY] ═══ PHASE A: PCI BUS-LEVEL WAKEUP ═══
+[console] [USB] X-RAY: PCI bus wakeup...
+[XRAY] PCI 00:14.0: VID=8086 DID=02ed CMD=0406 STS=0290
+[XRAY]   CMD decode: IO=0 Mem=1 BusMaster=1 IntxDis=1
+[XRAY] PCI Cap @ 0x70: ID=0x01 next=0x80
+[XRAY] PM Cap at 0x70: PMCSR=0x0008 PowerState=D0 PME_En=0 PME_Sts=0
+[XRAY] Device already in D0 (good)
+[XRAY] PCI CMD: 0x0406 → 0x0407 (enabling IO+Mem+BusMaster)
+[XRAY] PCI CMD readback: 0x0406 BusMaster=1 MemSpace=1
+[XRAY] Intel LPC USB routing: USB3PR=0x0000ffce USB2PR=0x000000a2
+[XRAY] Post-wakeup: BAR0=0x00000000:b1300004 CMD=0x0406 STS=0x0290
+[XRAY] ═══ PHASE A COMPLETE ═══
+[xhci] BAR0 = 0x00000000b1300000
+[xhci] PCI CMD = 0x0406
+[xhci] MMIO mapped: phys 0x00000000b1300000 -> virt 0x0000555500002000 (64KB)
+[xhci] Proof-of-Life: CAPLENGTH=128 HCIVERSION=0x0110
+[xhci] USBCMD before init: 0x00000000
+[console] [USB] XHCI BIOS handoff...
+[xhci] HCCPARAMS1=0x200077c1
+[xhci] xECP offset=0x2000 (byte offset=0x8000)
+[xhci] xCap[0]: addr=0x8000 id=2 next=8 raw=0x02000802
+[xhci] xCap[1]: addr=0x8020 id=2 next=20 raw=0x03011402
+[xhci] xCap[2]: addr=0x8070 id=192 next=255 raw=0x005cffc0
+[xhci] xCap[3]: addr=0x846c id=1 next=34 raw=0x01002201
+[xhci] Found USBLEGSUP capability!
+[xhci] USBLEGSUP: BIOS_OWNED=false OS_OWNED=true
+[xhci] BIOS does not own controller
+[console] [USB] OS already owns controller
+[xhci] USBLEGCTLSTS before=0xe0000000
+[xhci] USBLEGCTLSTS after=0x00000000 (SMI disabled)
+[xhci] Supported Protocol: USB 2.0 name=0x20425355 offset=1 count=12 (ports 1-12)
+[console] [USB] Protocol: USB 2.0 ports detected
+[xhci] Supported Protocol: USB 3.1 name=0x20425355 offset=13 count=6 (ports 13-18)
+[console] [USB] Protocol: USB 3.0 ports detected
+[xhci] Max slots: 64
+[xhci] Max ports: 18
+[xhci] Resetting controller...
+[xhci] HCRST cleared
+[xhci] CNR cleared after ~0ms — controller ready
+[xhci] Reset complete
+[DMA-SHIELD] HCSPARAMS2=0x14200054 MaxScratchpadBufs=65 (Hi5=2 Lo5=1) PAGESIZE=0x1
+[SILICON-FIST] HCCPARAMS1=0x200077c1 AC64=1 CSZ=0 MaxPSA=7
+[SILICON-FIST] 64-bit Addressing Capability CONFIRMED — DAC enabled
+[SILICON-FIST] DCBAA: virt=0x000044445ba69000 phys=0x0000000017796000 align=8192
+[DMA-SHIELD] Allocating 65 scratchpad buffers in LOW MEMORY (Heap)...
+[SILICON-FIST] LOW-MEM LOCK: DCBAA[0] -> 0x000000001779b000
+[console] [USB] Low-Mem Scratchpad Locked
+
+[ERRATA] ===== Boot: STANDARD (RCS=1) =====
+[ERRATA] DCBAAP=0x00000000_17796000
+[ERRATA] PRE-FLIGHT: TRB[0]=0x00000000 cycle=0 (empty, waiting for SILICON-FIST NOOP) phys=0x00000000177dd000
+[xhci] IR0 configured: ERSTSZ@555500004028=1 ERDP@555500004038=177DF000 ERSTBA@555500004030=177E1000
+[ERRATA] MFENCE — all DMA structures committed to RAM
+[ERRATA] Post-start USBSTS=0x00000018 HCH=0 HSE=1 EINT=1 PCD=0
+[ERRATA] *** HSE DETECTED AFTER START ***
+[console] [USB] HSE after start!
+[ERRATA] Post-HSE-clear USBSTS=0x00000000 (HSE=0 EINT=0)
+[console] [USB] Controller started, powering ports...
+[SILICON-FIST] Doorbell 0 kicked — command ring fetch engine activated
+[SILICON-FIST] NOOP completion: type=34 CC=1 at 0ms
+[SILICON-FIST] NOOP completion: type=34 CC=1 at 1ms
+[SILICON-FIST] NOOP completion: type=34 CC=1 at 2ms
+[SILICON-FIST] NOOP completion: type=33 CC=1 at 3ms
+[SILICON-FIST] NOOP SUCCESS — Command Ring DMA path VERIFIED!
+[console] [USB] SILICON-FIST: Command ring OK!
+[xhci] HCCPARAMS1=0x200077c1 PPC=0 (port power control not supported (always on))
+[xhci] Waiting 200ms for port stabilization...
+[console] [USB] Waiting for device detection...
+[xhci] Port 3 post-stabilize: PORTSC=0x000206e1 CCS=1 PED=0 PLS=Polling SPD=Full Proto=USB2
+[xhci] Port 7 post-stabilize: PORTSC=0x000206e1 CCS=1 PED=0 PLS=Polling SPD=Full Proto=USB2
+[xhci] Port 9 post-stabilize: PORTSC=0x000206e1 CCS=1 PED=0 PLS=Polling SPD=Full Proto=USB2
+[xhci] Controller initialized successfully!
+
+[DMA-TEST] ==================================================
+[DMA-TEST] CONTROLLER VIEW (DCBAA[0]): 0x000000001779b000
+[DMA-TEST] DRIVER VIEW (SPA PHYS):     0x000000001779b000
+[DMA-TEST] DIAGNOSIS: MATCH (OK) (Diff: 0x0)
+[DMA-TEST] ==================================================
+
+
+[DMA-TEST] ==================================================
+[DMA-TEST] CONTROLLER VIEW (DCBAA[0]): 0x000000001779b000
+[DMA-TEST] DRIVER VIEW (SPA PHYS):     0x000000001779b000
+[DMA-TEST] DIAGNOSIS: MATCH (OK) (Diff: 0x0)
+[DMA-TEST] ==================================================
+
+[SILICON-FIST] DCBAA[0] verified correct.
+[xhci] === MICROSCOPE: Atomic USB Handshake Audit ===
+[console] [USB] MICROSCOPE: Handshake audit...
+[MICROSCOPE] Controller: USBCMD=0x00000001 USBSTS=0x00000000 CONFIG=0x00000040 R/S=1 HCH=0
+[MICROSCOPE] ──── Port 3 Phase-A PRE-RESET ── Protocol: USB 2.0 ────
+[MICROSCOPE] Port 3 PORTSC=0x000206e1 PED=0 PLS=7(Polling) SPD=1(Full)
+[BLACK BOX] PHASE-A Port 3 Phase 0: USBCMD=0x00000001 USBSTS=0x00000000 PORTSC=0x000206e1 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=0 OCA=0 PR=0 PLS=7 PP=1 SPD=1 LWS=0 CSC=1 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 3: Protocol=USB2.0 reset_strategy=COLD-only (PR)
+[XHCI-DEBUG] Port 11: 0x000206e1 -> write 0x00fe0200 -> readback 0x000006e1
+[MICROSCOPE] Port 3 LATCH-CLEAR: wrote 0x00fe0000, readback=0x000006e1, leftover=0x00000000
+[BLACK BOX] POST-LATCH-CLEAR Port 3 Phase 1: USBCMD=0x00000001 USBSTS=0x00000000 PORTSC=0x000006e1 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=0 OCA=0 PR=0 PLS=7 PP=1 SPD=1 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 3: Issuing COLD RESET (PR)...
+[XHCI-DEBUG] Port 11: 0x000006e1 -> write 0x00fe0200 -> readback 0x000006e1 [NO CHANGE!]
+[XHCI-DEBUG] Port 11: 0x000006e1 -> write 0x00000210 -> readback 0x00000791
+[MICROSCOPE] Port 3 Phase-B COLD CMD LATCHED: PORTSC=0x00000791 PR=1
+[MICROSCOPE] Port 3 Phase-C T+1ms: 0x00000f91 (PR=1 PRC=0 PED=0 PLS=12)
+[MICROSCOPE] Port 3 Phase-C T+7ms: 0x00200e03 (PR=0 PRC=1 PED=1 PLS=0)
+[MICROSCOPE] Port 3: Cold reset IDLE @T+7ms (PRC=1 WRC=0)
+[BLACK BOX] POST-COLD-WAIT Port 3 Phase 4: USBCMD=0x00000001 USBSTS=0x00000010 PORTSC=0x00200e03 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=1 OCA=0 PR=0 PLS=0 PP=1 SPD=3 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=1 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 3 Phase-D ACK: before=0x00200e03 writing=0x00fe0200 PED_IN_WRITE=0 (safe)
+[MICROSCOPE] Port 3 Phase-D POST-ACK +1ms: PORTSC=0x00000e03 PED=1 PLS=0
+[BLACK BOX] POST-COLD-SETTLE Port 3 Phase 5: USBCMD=0x00000001 USBSTS=0x00000010 PORTSC=0x00000e03 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=1 OCA=0 PR=0 PLS=0 PP=1 SPD=3 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 3: COLD RESET SUCCESS — PED=1, PLS=U0
+[BLACK BOX] FINAL Port 3 Phase 10: USBCMD=0x00000001 USBSTS=0x00000010 PORTSC=0x00000e03 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=1 OCA=0 PR=0 PLS=0 PP=1 SPD=3 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[xhci] Port 3: *** ENABLED *** PLS=U0 Speed=High
+[console] [USB] Device @ High Speed (480 Mbps)
+[TELEMETRY] send_command: type=9 param=0x0000000000000000 enqueue_phys=0x00000000177dd010 cycle=true
+[enable_slot] Event: param=0x00000000177dd010 status=0x01000000 ctrl=0x01008401 cc=1 slot_id=1
+[xhci] Enabled slot: 1
+[SILICON-FIST] Starting Address Device (Context Size: 32 bytes)...
+[CONTEXT-FLUSH] DeviceContext flushed: virt=0x000044445bab5000 phys=0x00000000177e2000 size=4096
+[CONTEXT-FLUSH] DCBAA[1] -> 0x00000000177e2000 (LOCKED & FLUSHED)
+[TELEMETRY] address_device: slot=1 port=4 speed=3
+[TELEMETRY]   InputCtx phys=0x00000000177e4000 align=0
+[TELEMETRY]   DevCtx   phys=0x00000000177e2000 align=0
+[TELEMETRY]   EP0Ring  phys=0x00000000177e6000
+[SILICON-FIST] VERIFY: DCBAA[1] = 0x00000000177e2000 | InputFlags = 0x00000003
+[SILICON-FIST] Sending AddressDevice. InputCtx=0x00000000177e4000
+[TELEMETRY] send_command: type=11 param=0x00000000177e4000 enqueue_phys=0x00000000177dd020 cycle=true
+[SILICON-FIST] ADDRESS DEVICE SUCCESS! Saving state...
+[SILICON-FIST] EP0 Ring stored at index 33
+[SILICON-FIST] Device Configured & Stored. Ready for Enumeration.
+[SILICON-FIST] identifying device (HEAP MODE)...
+[TELEMETRY] control_transfer: data_buf phys=0x00000000176def80 len=18 align=0
+[xhci] VID: 1921
+[xhci] PID: 21863
+[xhci] Class: 0
+[TELEMETRY] control_transfer: data_buf phys=0x00000000176dd900 len=256 align=0
+[xhci] Config Descriptor Length: 32
+[xhci] Mass Storage Interface Found!
+  Found Bulk IN: 129
+  Found Bulk OUT: 2
+[xhci] *** MASS STORAGE CLASS DETECTED! ***
+[console] [USB] MASS STORAGE MOUNTED!
+[xhci] SET_CONFIGURATION(1) OK
+[xhci] Configure endpoints: slot=1 speed=3 bulk_mps=512 in_dci=3 out_dci=4 max_dci=4
+[TELEMETRY] send_command: type=12 param=0x00000000177e4000 enqueue_phys=0x00000000177dd030 cycle=true
+[xhci] Endpoints configured
+[xhci] Bulk endpoints configured for SCSI
+[console] [USB] SCSI Transport Ready
+[MICROSCOPE] ──── Port 7 Phase-A PRE-RESET ── Protocol: USB 2.0 ────
+[MICROSCOPE] Port 7 PORTSC=0x000206e1 PED=0 PLS=7(Polling) SPD=1(Full)
+[BLACK BOX] PHASE-A Port 7 Phase 0: USBCMD=0x00000001 USBSTS=0x00000000 PORTSC=0x000206e1 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=0 OCA=0 PR=0 PLS=7 PP=1 SPD=1 LWS=0 CSC=1 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 7: Protocol=USB2.0 reset_strategy=COLD-only (PR)
+[XHCI-DEBUG] Port 15: 0x000206e1 -> write 0x00fe0200 -> readback 0x000006e1
+[MICROSCOPE] Port 7 LATCH-CLEAR: wrote 0x00fe0000, readback=0x000006e1, leftover=0x00000000
+[BLACK BOX] POST-LATCH-CLEAR Port 7 Phase 1: USBCMD=0x00000001 USBSTS=0x00000000 PORTSC=0x000006e1 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=0 OCA=0 PR=0 PLS=7 PP=1 SPD=1 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 7: Issuing COLD RESET (PR)...
+[XHCI-DEBUG] Port 15: 0x000006e1 -> write 0x00fe0200 -> readback 0x000006e1 [NO CHANGE!]
+[XHCI-DEBUG] Port 15: 0x000006e1 -> write 0x00000210 -> readback 0x00000791
+[MICROSCOPE] Port 7 Phase-B COLD CMD LATCHED: PORTSC=0x00000791 PR=1
+[MICROSCOPE] Port 7 Phase-C T+1ms: 0x00000f91 (PR=1 PRC=0 PED=0 PLS=12)
+[MICROSCOPE] Port 7 Phase-C T+7ms: 0x00200e03 (PR=0 PRC=1 PED=1 PLS=0)
+[MICROSCOPE] Port 7: Cold reset IDLE @T+7ms (PRC=1 WRC=0)
+[BLACK BOX] POST-COLD-WAIT Port 7 Phase 4: USBCMD=0x00000001 USBSTS=0x00000010 PORTSC=0x00200e03 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=1 OCA=0 PR=0 PLS=0 PP=1 SPD=3 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=1 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 7 Phase-D ACK: before=0x00200e03 writing=0x00fe0200 PED_IN_WRITE=0 (safe)
+[MICROSCOPE] Port 7 Phase-D POST-ACK +1ms: PORTSC=0x00000e03 PED=1 PLS=0
+[BLACK BOX] POST-COLD-SETTLE Port 7 Phase 5: USBCMD=0x00000001 USBSTS=0x00000010 PORTSC=0x00000e03 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=1 OCA=0 PR=0 PLS=0 PP=1 SPD=3 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 7: COLD RESET SUCCESS — PED=1, PLS=U0
+[BLACK BOX] FINAL Port 7 Phase 10: USBCMD=0x00000001 USBSTS=0x00000010 PORTSC=0x00000e03 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=1 OCA=0 PR=0 PLS=0 PP=1 SPD=3 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[xhci] Port 7: *** ENABLED *** PLS=U0 Speed=High
+[console] [USB] Device @ High Speed (480 Mbps)
+[TELEMETRY] send_command: type=9 param=0x0000000000000000 enqueue_phys=0x00000000177dd040 cycle=true
+[enable_slot] Event: param=0x00000000177dd040 status=0x01000000 ctrl=0x02008401 cc=1 slot_id=2
+[xhci] Enabled slot: 2
+[SILICON-FIST] Starting Address Device (Context Size: 32 bytes)...
+[CONTEXT-FLUSH] DeviceContext flushed: virt=0x000044445bab7000 phys=0x00000000177e4000 size=4096
+[CONTEXT-FLUSH] DCBAA[2] -> 0x00000000177e4000 (LOCKED & FLUSHED)
+[TELEMETRY] address_device: slot=2 port=8 speed=3
+[TELEMETRY]   InputCtx phys=0x00000000177e6000 align=0
+[TELEMETRY]   DevCtx   phys=0x00000000177e4000 align=0
+[TELEMETRY]   EP0Ring  phys=0x00000000177ec000
+[SILICON-FIST] VERIFY: DCBAA[2] = 0x00000000177e4000 | InputFlags = 0x00000003
+[SILICON-FIST] Sending AddressDevice. InputCtx=0x00000000177e6000
+[TELEMETRY] send_command: type=11 param=0x00000000177e6000 enqueue_phys=0x00000000177dd050 cycle=true
+[SILICON-FIST] ADDRESS DEVICE SUCCESS! Saving state...
+[SILICON-FIST] EP0 Ring stored at index 65
+[SILICON-FIST] Device Configured & Stored. Ready for Enumeration.
+[SILICON-FIST] identifying device (HEAP MODE)...
+[TELEMETRY] control_transfer: data_buf phys=0x00000000176e0c00 len=18 align=0
+[xhci] VID: 5075
+[xhci] PID: 21525
+[xhci] Class: 239
+[TELEMETRY] control_transfer: data_buf phys=0x00000000176de700 len=256 align=0
+[xhci] Config Descriptor Length: 820
+[xhci] Device: Class=0xef Subclass=0x02
+[console] [USB] Unknown Device
+[MICROSCOPE] ──── Port 9 Phase-A PRE-RESET ── Protocol: USB 2.0 ────
+[MICROSCOPE] Port 9 PORTSC=0x000206e1 PED=0 PLS=7(Polling) SPD=1(Full)
+[BLACK BOX] PHASE-A Port 9 Phase 0: USBCMD=0x00000001 USBSTS=0x00000000 PORTSC=0x000206e1 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=0 OCA=0 PR=0 PLS=7 PP=1 SPD=1 LWS=0 CSC=1 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 9: Protocol=USB2.0 reset_strategy=COLD-only (PR)
+[XHCI-DEBUG] Port 17: 0x000206e1 -> write 0x00fe0200 -> readback 0x000006e1
+[MICROSCOPE] Port 9 LATCH-CLEAR: wrote 0x00fe0000, readback=0x000006e1, leftover=0x00000000
+[BLACK BOX] POST-LATCH-CLEAR Port 9 Phase 1: USBCMD=0x00000001 USBSTS=0x00000000 PORTSC=0x000006e1 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=0 OCA=0 PR=0 PLS=7 PP=1 SPD=1 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 9: Issuing COLD RESET (PR)...
+[XHCI-DEBUG] Port 17: 0x000006e1 -> write 0x00fe0200 -> readback 0x000006e1 [NO CHANGE!]
+[XHCI-DEBUG] Port 17: 0x000006e1 -> write 0x00000210 -> readback 0x00000791
+[MICROSCOPE] Port 9 Phase-B COLD CMD LATCHED: PORTSC=0x00000791 PR=1
+[MICROSCOPE] Port 9 Phase-C T+7ms: 0x00200603 (PR=0 PRC=1 PED=1 PLS=0)
+[MICROSCOPE] Port 9: Cold reset IDLE @T+7ms (PRC=1 WRC=0)
+[BLACK BOX] POST-COLD-WAIT Port 9 Phase 4: USBCMD=0x00000001 USBSTS=0x00000010 PORTSC=0x00200603 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=1 OCA=0 PR=0 PLS=0 PP=1 SPD=1 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=1 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 9 Phase-D ACK: before=0x00200603 writing=0x00fe0200 PED_IN_WRITE=0 (safe)
+[MICROSCOPE] Port 9 Phase-D POST-ACK +1ms: PORTSC=0x00000603 PED=1 PLS=0
+[BLACK BOX] POST-COLD-SETTLE Port 9 Phase 5: USBCMD=0x00000001 USBSTS=0x00000010 PORTSC=0x00000603 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=1 OCA=0 PR=0 PLS=0 PP=1 SPD=1 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[MICROSCOPE] Port 9: COLD RESET SUCCESS — PED=1, PLS=U0
+[BLACK BOX] FINAL Port 9 Phase 10: USBCMD=0x00000001 USBSTS=0x00000010 PORTSC=0x00000603 DNCTRL=0x00000000 CRCR_LO=0x00000008 CONFIG=0x00000040
+[BLACK BOX]   PORTSC decode: CCS=1 PED=1 OCA=0 PR=0 PLS=0 PP=1 SPD=1 LWS=0 CSC=0 PEC=0 WRC=0 OCC=0 PRC=0 PLC=0 CEC=0 CAS=0 WPR=0
+[xhci] Port 9: *** ENABLED *** PLS=U0 Speed=Full
+[console] [USB] Device @ Full Speed (12 Mbps)
+[TELEMETRY] send_command: type=9 param=0x0000000000000000 enqueue_phys=0x00000000177dd060 cycle=true
+[enable_slot] Event: param=0x00000000177dd060 status=0x01000000 ctrl=0x03008401 cc=1 slot_id=3
+[xhci] Enabled slot: 3
+[SILICON-FIST] Starting Address Device (Context Size: 32 bytes)...
+[CONTEXT-FLUSH] DeviceContext flushed: virt=0x000044445bab9000 phys=0x00000000177e6000 size=4096
+[CONTEXT-FLUSH] DCBAA[3] -> 0x00000000177e6000 (LOCKED & FLUSHED)
+[TELEMETRY] address_device: slot=3 port=10 speed=1
+[TELEMETRY]   InputCtx phys=0x00000000177ee000 align=0
+[TELEMETRY]   DevCtx   phys=0x00000000177e6000 align=0
+[TELEMETRY]   EP0Ring  phys=0x00000000177f0000
+[SILICON-FIST] VERIFY: DCBAA[3] = 0x00000000177e6000 | InputFlags = 0x00000003
+[SILICON-FIST] Sending AddressDevice. InputCtx=0x00000000177ee000
+[TELEMETRY] send_command: type=11 param=0x00000000177ee000 enqueue_phys=0x00000000177dd070 cycle=true
+[SILICON-FIST] ADDRESS DEVICE SUCCESS! Saving state...
+[SILICON-FIST] EP0 Ring stored at index 97
+[SILICON-FIST] Device Configured & Stored. Ready for Enumeration.
+[SILICON-FIST] identifying device (HEAP MODE)...
+[TELEMETRY] control_transfer: data_buf phys=0x00000000176e2500 len=18 align=0
+[xhci] Control transfer failed: 3
+[MICROSCOPE] === COMPLETE: 3 connected, 3 enabled, 2 devices ===
+[console] [USB] Storage device ready for VFS
+[device-manager] xHCI driver: ONLINE
+[device-manager] Injecting Intel WiFi driver for 00:14.3
+[iwlwifi] init_with_device: 8086:02f0
+[iwlwifi] Device: Wi-Fi 6 AX201 (CNVi)
+[iwlwifi] PM cap @ 0xc8: PMCSR=0x0008 PowerState=D0
+[iwlwifi] Already in D0
+[pci] Activate 00:14.3 CMD: 0x0406 -> 0x0406 [BusMaster OK]
+[iwlwifi] PCI CMD: 0x0406 -> 0x0406
+[iwlwifi] BAR0: phys=0xb1318000 size=64KB
+[iwlwifi] MMIO mapped: phys 0xb1318000 -> virt 0x0000555500012000 (64KB)
+[iwlwifi] HW_REV: 0x00000351
+[iwlwifi] GP_CNTRL: 0x08040000 RF_Kill=false
+[iwlwifi] Interrupts disabled
+[iwlwifi] RESET: 0x00000010 -> 0x00000010
+[iwlwifi] WARNING: MAC clock not ready (may need firmware)
+[iwlwifi] MAC OTP: b7:65:e2:c8:10:b0
+[iwlwifi] HW_IF_CONFIG: 0x00880000 GIO: 0x001f0042 FW_ERR: 0x00000000
+[iwlwifi] Final GP_CNTRL: 0x08040008 RF_Kill=false
+[wifi] Driver ready: Wi-Fi 6 AX201 (CNVi) rf_kill=false
+[iwlwifi] ═══════════════════════════════════════════
+[iwlwifi] FIRMWARE BOOTSTRAP SEQUENCE START
+[iwlwifi] ═══════════════════════════════════════════
+[iwlwifi] Built-in firmware staged: iwlwifi.ucode (1406572 bytes, phys=0x18000000)
+[iwlwifi] Phase A: DMA firmware upload...
+[iwlwifi] DMA FW upload: phys=0x18000000 len=1406572 bytes
+[iwlwifi] FW first 32 bytes (virt=0xffff800018000000):
+  00 00 00 00  49 57 4c 0a  72 65 6c 65  61 73 65 2f
+  63 6f 72 65  37 34 3a 3a  33 30 62 31  63 62 64 38
+[iwlwifi] FW static (include_bytes) magic: 0x00000000 first4=[00 00 00 00]
+[iwlwifi] FW magic: 0x00000000 (expected 0x0a4c5749)
+[iwlwifi] NIC power-up: Gen2/CNVi APMG init...
+[iwlwifi] APMG: SW_RESET done, CSR_RESET=0x00000010
+[iwlwifi] APMG: INIT_DONE set, GP_CNTRL=0x08040004, polling MAC_CLOCK_READY...
+[iwlwifi] APMG: MAC clock ready after ~0us (GP=0x08040005)
+[iwlwifi] APMG init complete
+[iwlwifi] Loading 1 sections into device SRAM...
+[iwlwifi]   Section 0: dst=0x00000000 len=1406572 phys=0x18158000
+[iwlwifi]   Section 0 BSM timeout, trying FH DMA...
+[iwlwifi] All firmware sections loaded into device SRAM
+[iwlwifi] Phase B: Boot microcontroller + ALIVE...
+[iwlwifi] Booting microcontroller...
+[iwlwifi] CPU reset released, polling for ALIVE...
+[iwlwifi] ALIVE poll: 500ms GP=0x08040005 FW_ERR=0x00000000 INT=0x00000000
+[iwlwifi] ALIVE: inferred from GP_CNTRL INIT_DONE
+[iwlwifi] Firmware ALIVE confirmed — microcontroller running
+[iwlwifi] Phase C: NVM initialization...
+[iwlwifi] NVM init: sending configuration commands...
+[iwlwifi] PHY config: 0x000300f7 (hw_rev=0x00000351)
+[iwlwifi] NVM: hw_type=0x00000000 hw_rev=0x00000000 rf_cfg=0x00000000
+[iwlwifi] NVM calibration status: 0x00000000
+[iwlwifi] TX power set to 30 dBm
+[iwlwifi] Regulatory domain: 0x00000000
+[iwlwifi] NVM initialization complete — RF subsystem configured
+[iwlwifi] Phase D: Command queue initialization...
+[iwlwifi] Allocating TX command queue...
+[iwlwifi] TX queue: TFD=0x182b1000 CMD=0x182b3000 BC=0x182b6000
+[iwlwifi] TX queue 0 configured
+[iwlwifi] Allocating RX queue...
+[iwlwifi] RX queue: BD=0x182b7000 USED=0x182b8000 STTS=0x182b9000
+[iwlwifi] RX queue configured, interrupts enabled
+[iwlwifi] Command queue ready
+[iwlwifi] ═══════════════════════════════════════════
+[iwlwifi] FIRMWARE BOOTSTRAP COMPLETE — RADIO ONLINE
+[iwlwifi] ═══════════════════════════════════════════
+[wifi] Firmware bootstrap complete — radio online
+[iwlwifi] Firmware bootstrap complete — device fully operational
+[iwlwifi] Wi-Fi 6 AX201 (CNVi) initialized OK (rev=0x351 rf_kill=false)
+[device-manager] Intel WiFi driver: ONLINE
+[usb] Scanning for mass storage devices...
+[usb] Found MSC device, slot=1
+[msc] Initializing MSC device, slot=1
+[xhci] Configure endpoints: slot=1 speed=3 bulk_mps=512 in_dci=3 out_dci=4 max_dci=4
+[TELEMETRY] send_command: type=12 param=0x0000000017797000 enqueue_phys=0x00000000177dd080 cycle=true
+[xhci] Endpoints configured
+[msc] USB KINETIC: Initializing MSC device...
+[msc] Test Unit Ready: OK (attempt 1)
+[msc] Sending INQUIRY...
+[msc] INQUIRY: OK (attempt 1)
+[msc] Device: "SanDisk " / "Cruzer Blade    "
+[console] [USB] MSC device identified
+[msc] Reading capacity...
+[msc] Read Capacity: OK (attempt 1)
+[msc] Block count: 60088320
+[msc] Block size: 512
+[msc] Capacity (MB): 29340
+[console] [USB] MSC ready
+[usb] Mass storage devices active: 1 (discovered 1, added 1)
+[device-manager] === INJECTION COMPLETE ===
+  storage_controllers=2
+  storage: AHCI controller
+    bdf=5888
+    vendor=32902
+    device=723
+    bar0=2972852224
+    bar0_size=18446744069414592512
+    ahci: init placeholder (not implemented)
+  storage: NVMe controller
+    bdf=458752
+    vendor=7695
+    device=1
+    bar0=2970615808
+    bar0_size=16384
+  storage: nvme init
+    nvme: controller BAR mapped
+      cap=207165128831
+      vs=66304
+    nvme: model=KBG40ZNT256G TOS
+    nvme: bounce page allocated (4KiB)
+    nvme: PRP list pool allocated
+    nvme: init OK (admin + io queue)
+[aetheros] Attempting boot media mount...
+[fs] Trying Priority 1: NVMe...
+[fs] MBR partition table detected on NVMe
+[fs] GPT protective MBR on NVMe, parsing GPT...
+[GPT] Disk GUID: 5BC703EA-E839-2444-A820-F86299DE84CF
+[GPT] Partitions: 128 entries at LBA 2
+[GPT] Usable LBA range: 34 - 500118158
+[GPT] Partition 0: "STATE" Linux Filesystem (235892 MB) LBA 17010688-500118143
+[GPT] Partition 1: "KERN-A" Unknown (64 MB) LBA 16879616-17010687
+[GPT] Partition 2: "ROOT-A" Unknown (4032 MB) LBA 8622080-16879615
+[GPT] Partition 3: "KERN-B" Unknown (64 MB) LBA 8491008-8622079
+[GPT] Partition 4: "ROOT-B" Unknown (4032 MB) LBA 233472-8491007
+[GPT] Partition 5: "KERN-C" Unknown (0 MB) LBA 65-65
+[GPT] Partition 6: "ROOT-C" Unknown (0 MB) LBA 66-66
+[GPT] Partition 7: "OEM" Linux Filesystem (16 MB) LBA 69632-102399
+[GPT] Partition 8: "reserved" Unknown (0 MB) LBA 67-67
+[GPT] Partition 9: "reserved" Unknown (0 MB) LBA 68-68
+[GPT] Partition 10: "RWFW" Unknown (0 MB) LBA 64-64
+[GPT] Partition 11: "EFI-SYSTEM" EFI System (64 MB) LBA 102400-233471
+[fs] GPT: FAT at LBA 102400 (EFI System)
+[fat] Detected FAT16 filesystem
+[fat] FAT16: fat_start=102404 root_dir_start=102660 root_dir_secs=32 data_start=102692 total=131040
+[console] [FAT] FAT16 filesystem detected
+[fs] FAT32 filesystem detected on NVMe
+[fs] Hardware Abstraction: Mounted via NVMe
+[main] Storage mount result: SUCCESS
+[boot-prof] mount_boot_media: 28654188 cycles (~14327 us)
+[aetheros] VFS auto-mount starting...
+[VFS] Starting auto-mount scan...
+[VFS] NVMe device available
+[VFS] Mounting NVMe at /nvme0 (partition offset 102400)
+[VFS] Mounted FAT32 at /nvme0 (nvme0)
+[VFS] Found 1 USB Mass Storage device(s)
+[console] [FS] USB Mass Storage detected!
+[mbr] Partition Table:
+  [0] type=0x0c  lba_start=32 sectors=60088288 boot=N
+[VFS] USB0: MBR detected, FAT partition at LBA 32
+[VFS] USB0: FAT32 filesystem detected (USB_DRIVE)
+[console] [FS] USB0: FAT32 (USB_DRIVE)
+[VFS] Mounted FAT32 at /usb0 (usb0)
+[VFS] USB0: Health check: VBR sig_valid=true
+[fat] list_dir_usb: OK dev=0 path="/" entries=10
+[VFS] USB0: Root dir: 10 entries
+[VFS]   [0] System Volume Information DIR 0B
+[VFS]   [1] AETHLOG.TXT FILE 110508B
+[VFS]   [2] FOUND.000 DIR 0B
+[VFS]   [3] tinyllama-1.1b-chat-v1.0.Q2_K.gguf FILE 483116416B
+[VFS]   [4] limine.conf FILE 85B
+[VFS] Mounted RamFS at / (ramdisk0)
+[VFS] Auto-mount complete: 3 filesystem(s) mounted
+[main] VFS auto-mount: 3 filesystem(s) mounted
+[crash_log] Background flush worker spawned (tid=100)
+
+=== CHECKPOINT: VFS_MOUNTED ===
+[boot-prof] vfs_auto_mount: 6906186574 cycles (~3453093 us)
+[iommu] Skipping compute domain (IOMMU not available)
+[main] Skipping ML runtime verification test (boot self-tests disabled)
+  usb: xHCI placeholder (not implemented)
+[main] Skipping VFS demo (boot self-tests disabled)
+[main] Skipping network/cloud demos (boot self-tests disabled)
+[main] Skipping stress suite (boot self-tests disabled)
+[boot-prof] phase3_storage_and_validation: 27482522996 cycles (~13741261 us)
+[fabric] Model Fabric initialized (ZONE_TENSOR budget: 7348 MB)
+[model-mgr] Model Lifecycle Manager initialized (8 slots)
+[model-mgr] Background I/O task spawned (tid=101)
+[gpu-core] Scanning PCIe for compute accelerators...
+[gpu-core] Compute device: Intel 8086:9b41 class=03:00 (no MSI-X)
+  BAR0
+    phys=00000000b0000000 virt=0000555500026000 size=16777216
+  BAR2
+    phys=00000000a0000000 virt=0000555501026000 size=268435456
+[gpu-core] Discovery complete:  compute device(s)1
+  compute_gpus=1
+[virtio-gpu] Probing PCIe for VirtIO-GPU (1AF4:1050)...
+[virtio-gpu] No VirtIO device in compute registry
+[virtio-gpu] No VirtIO-GPU found — Router stays CPU-only
+[intel-gpu] Found Intel iGPU: device_id=0x9b41 gen=Gen9 BAR0=0xb0000000 (16384KB)
+[intel-gpu] BAR0 mapped at virt=0x555500026000
+[intel-gpu] Render timestamp: 0x00000000 (non-zero = GPU alive)
+[intel-backend] Probing: gen=Gen9 rcs_ready=false
+[intel-backend] Registering Intel iGPU compute backend...
+[intel-gpu] Initializing Render Command Streamer...
+[intel-gpu] PPAT programmed: LO 0x000a060d->0x000a060d HI 0x0e0e0e0e->0x0e0e0e0e
+[intel-gpu] PPAT[0]=0x0d(WB+LLC) [1]=0x06(WC) [2]=0x0a(WT) [3]=0x00(UC)
+[intel-gpu] MOCS[2] Gen9-BC: control=0x0000003b l3=0x0030
+[intel-gpu] Ring buffer: phys=0x1eb4d0000 virt=0xffff8001eb4d0000 size=16KB
+[intel-gpu] GGTT entries programmed for ring buffer
+[intel-gpu] RCS_RING_CTL = 0x00003001 (enabled=true)
+[intel-gpu] RCS liveness test PASSED — ring is live
+[intel-gpu] GT freq: RP0=20(1000MHz) RP1=6(300MHz) RPn=6(300MHz)
+[intel-gpu] GT freq: requested RP0=1000MHz, CAGF=100MHz RPSTAT1=0x03000000
+[intel-gpgpu] Initializing GPGPU state heap...
+[intel-gpgpu] State heap: phys=0x1eb4d4000 virt=0xffff8001eb4d4000 GGTT=0x2004000
+[intel-gpgpu] Sync page: phys=0x1eb524000 GGTT=0x21e0000
+[intel-gpgpu] EU Hello World kernel installed at state_heap+0x400 (16 DWs / 4 instructions)
+[intel-gpgpu] GPGPU state initialization COMPLETE
+[intel-lrc] LRC allocated: phys=0x1eb525000 GGTT=0x21e4000 (80KB, 20 pages)
+[ppgtt] Minimal PPGTT: PD=0x1eb539000 PT=0x1eb53a000 heap_pages=80
+[ppgtt]   Ring@PT[0..3]=0x1eb4d0000 Heap@PT[4..83]=0x1eb4d4000 Sync@PT[480]=0x1eb524000 LRC@PT[484..503]=0x1eb525000
+[intel-lrc] PDP0-3=0x1eb539000 (all valid, PPGTT active)
+[intel-lrc] GFX_MODE(0x229C)=0x00008001 EXECLIST_ENABLE=true HWS_PGA=0x21e4000
+[intel-lrc] Logical Ring Context initialized — ELSP ready
+[intel-backend] init_hardware: device=0x9b41 rcs=true gpgpu=true
+[gpu-backend] Registering: Intel iGPU GPGPU (Gen9 Bare-Metal)
+[intel-backend] ROUND18BY cooperative Q4 SLM reconstruction write-footprint repair over stable production
+[intel-backend] ✓ Backend registered — hybrid mode ACTIVE
+[router] Hybrid Compute Router initializing...
+[router] GPU backend detected — hybrid mode ACTIVE
+[router] === Hybrid Compute Router ===
+[router] Mode: GPU preferred
+[router] GPU available: yes
+[router] GPU dispatches: 0
+[router] CPU dispatches: 0
+[router] GPU errors (fallback): 0
+[CPU-GEMV-CENSUS] ===== routed CPU GEMV profile =====
+[CPU-POLICY] ===== calibrated Q6_K worker policies =====
+[CPU-POLICY] no Q6_K policies calibrated
+[vko] Tile mapper ready: 512 tiles, VA 0xffffc90000000000..0xffffc90040000000 (1024 MiB window)
+[vko-prefetch] MDTS-safe daemon spawned (tid=102, chunk=128K, depth=32, extent-aware)
+[vko-evictor] Evictor daemon spawned (tid=103, trail=4)
+[qos] Quality of Service subsystem initialized
+[irpc] Inference RPC subsystem initialized
+[net] VirtIO-Net ZC not found — use -device virtio-net-pci in QEMU for networking
+[wifi] Wireless adapter detected (driver-ready HW mode)
+[gateway] Inference Gateway initialized on port 8080
+[telemetry] Observability subsystem initialized
+[main] Skipping traffic simulator (disabled by default)
+[battery] Initializing ACPI battery driver...
+[battery] No FADT found (ACPI table missing)
+[battery] Probing EC at cmd=0x66 data=0x62...
+[battery] EC status register: 0x40 (IBF=0 OBF=0)
+[battery] EC probe OK: AC_STATUS=0x00 (AC=disconnected)
+[battery] Init complete: present=false ac=false charging=false 255% 0mV 0mW
+[boot-prof] phase7_ai_and_services: 1164397036 cycles (~582198 us)
+[runtime] isolation policy:
+  data_plane_mask=0x0
+  irq_mask=0x15
+  data_plane_cpus=0
+[runtime] IRQ policy:
+  allowed_mask=0x65535
+[boot-prof] total_boot_to_dashboard: 28975851402 cycles (~14487925 us)
+[aetheros] BOOT COMPLETE — entering compositor main loop
+[main] Skipping boot GPU diagnostics (disabled by default)
+[pool] Neural Compute Pool activated: 2 worker cores
+[sched] Core 2 entering Neural Compute Pool (pool_index=0)
+[amp] V6.0 Neural Compute Pool: 4 cores online, Core 1 = inference master, 2 pool workers
+[sched] Core 3 entering Neural Compute Pool (pool_index=1)
+[amp] Compute Core 1: waiting for model...[aetheros] gfx: starting main loop
+
+[fat] Detected FAT16 filesystem
+[fat] FAT16: fat_start=102404 root_dir_start=102660 root_dir_secs=32 data_start=102692 total=131040
+[console] [FAT] FAT16 filesystem detected
+[explorer] scan_all_models: 3 volumes to scan
+[explorer] Volume "/nvme0" (FATVOLUME) -> 0 results
+[fat] list_dir_usb: OK dev=0 path="/" entries=11
+[fat] list_dir_usb: OK dev=0 path="/EFI" entries=1
+[fat] list_dir_usb: OK dev=0 path="/EFI/BOOT" entries=1
+[fat] list_dir_usb: OK dev=0 path="/BOOT" entries=16
+[fat] list_dir_usb: OK dev=0 path="/FOUND.000" entries=3
+[fat] list_dir_usb: OK dev=0 path="/System Volume Information" entries=2
+[explorer] Volume "/usb0" (USB0) -> 4 results
+[explorer]   MODEL: "tinyllama-1.1b-chat-v1.0.Q2_K.gguf" path="/usb0/tinyllama-1.1b-chat-v1.0.Q2_K.gguf" size=483116416
+[explorer]   MODEL: "llama-3.2-1b-instruct-q4_k_m.gguf" path="/usb0/llama-3.2-1b-instruct-q4_k_m.gguf" size=807690656
+[explorer]   MODEL: "google_gemma-3-1b-it-qat-Q6_K.gguf" path="/usb0/google_gemma-3-1b-it-qat-Q6_K.gguf" size=1011738944
+[explorer]   MODEL: "google_gemma-3-1b-it-qat-Q4_K_M.gguf" path="/usb0/google_gemma-3-1b-it-qat-Q4_K_M.gguf" size=806058560
+[explorer] Volume "/" (RAMDISK) -> 0 results
+[explorer] scan_all_models: 4 model(s) found
+[model-mgr] Scan requested
+[console] [AI] Storage scan started...
+[fat] list_dir_usb: OK dev=0 path="/" entries=11
+[console] [AI] Discovered model: tinyllama-1.1b-chat-v1.0.Q2_K.gguf
+[console] [AI] Discovered model: llama-3.2-1b-instruct-q4_k_m.gguf
+[console] [AI] Discovered model: google_gemma-3-1b-it-qat-Q6_K.gguf
+[console] [AI] Discovered model: google_gemma-3-1b-it-qat-Q4_K_M.gguf
+[console] [AI] Scan complete: 4 model(s) found
+[bg-io] Scan complete: 4 model(s)
+[pipeline] Scan done, looking for "llama-3.2-1b-instruct-q4_k_m.gguf" in model slots...
+[pipeline] Found "llama-3.2-1b-instruct-q4_k_m.gguf" at slot 1 status=VALIDATED
+[loader] Phase change: IDLE -> INITIALIZING
+[model-mgr] Background load requested for slot 1
+[pipeline] Loading "llama-3.2-1b-instruct-q4_k_m.gguf" from slot 1
+[loader] Phase change: INITIALIZING -> INITIALIZING
+[fabric] Dynamic ZONE_TENSOR budget: budget=966MB stream=772MB working=772MB headroom=193MB free=7348MB total=7348MB
+[model-mgr] bg-init budget plan: stream=772MB working=772MB headroom=193MB free=7348MB total=7348MB
+[bg-io] INIT: slot=1 name="llama-3.2-1b-instruct-q4_k_m.gguf" path="/usb0/llama-3.2-1b-instruct-q4_k_m.gguf" size=807690656 bytes
+[fabric] Dynamic ZONE_TENSOR budget: budget=966MB stream=772MB working=772MB headroom=193MB free=7348MB total=7348MB
+[model-mgr] bg-stream budget plan: stream=772MB working=772MB headroom=193MB free=7348MB total=7348MB
+[cache-diag] virt=0xffff800020000000 → phys=0x20000000 PCD=0 PWT=0 huge=0 → WB (Write-Back) ✓
+[cache-diag] MTRR default_type=6 (WB) enabled=true
+[cache-diag] MTRR default is WB — tensor memory should be cached ✓
+[bg-io] FAT pre-resolve OK: cluster=29700 size=807690656
+[loader] Phase change: INITIALIZING -> STREAMING DATA
+[console] [AI] Loading model (770 MB)...
+[bg-io] INIT: streaming 807690656 bytes from "/usb0/llama-3.2-1b-instruct-q4_k_m.gguf"
+[pipeline] Loading... 5%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 87907us)
+[pipeline] Loading... 6%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 78903us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 89813us)
+[pipeline] Loading... 8%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 75849us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 82860us)
+[pipeline] Loading... 10%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 99817us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63932us)
+[pipeline] Loading... 12%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 86852us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 89832us)
+[pipeline] Loading... 14%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 64925us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63930us)
+[pipeline] Loading... 16%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 65019us)
+[console] [AI] Streaming: 25%% (192 MB)
+[bg-io] 25% (202113024/807690656 bytes)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 69910us)
+[pipeline] Loading... 18%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63972us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 81879us)
+[pipeline] Loading... 20%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63997us)
+[pipeline] Loading... 22%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 76884us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 72990us)
+[pipeline] Loading... 24%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 64931us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 62982us)
+[pipeline] Loading... 26%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63975us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 65981us)
+[pipeline] Loading... 28%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63949us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 96786us)
+[console] [AI] Streaming: 50%% (385 MB)
+[bg-io] 50% (403963904/807690656 bytes)
+[pipeline] Loading... 30%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63957us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 96831us)
+[pipeline] Loading... 32%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 77924us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63964us)
+[pipeline] Loading... 34%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 62930us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 64036us)
+[pipeline] Loading... 36%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 65920us)
+[pipeline] Loading... 38%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 62985us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 81953us)
+[pipeline] Loading... 40%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63974us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 69969us)
+[pipeline] Loading... 42%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 78951us)
+[console] [AI] Streaming: 75%% (577 MB)
+[bg-io] 75% (605814784/807690656 bytes)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 62977us)
+[pipeline] Loading... 43%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 65062us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63980us)
+[pipeline] Loading... 45%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 75930us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 64918us)
+[pipeline] Loading... 47%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 92887us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63992us)
+[pipeline] Loading... 49%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 81845us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 75903us)
+[pipeline] Loading... 51%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 76920us)
+[pipeline] Loading... 53%
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 69917us)
+[bg-io] Adaptive I/O: Chunk Size = 512 KB (Last read took 63989us)
+[bg-io] EOF at offset 807690656 (807690656 bytes total)
+[loader] Phase change: STREAMING DATA -> VERIFYING CRC32
+[bg-io] CRC: 0xFBCEC507 (807690656 bytes, 0 errors)
+[console] [AI] Verified: CRC32=0xFBCEC507
+[loader] Phase change: VERIFYING CRC32 -> LOADING INTO FABRIC
+[bg-io-debug] finalize tick 1: load_phase set to LoadingFabric
+[bg-io-debug] finalize tick 1: dropped ctx_guard
+[bg-io-debug] finalize tick 1: returning
+[bg-io-debug] STEP 2A: checking vko_zero_copy...
+[bg-io-debug] STEP 2A done: vko_zero_copy=false
+[bg-io-debug] STEP 2B: extracting tensor_buf...
+[bg-io-debug] STEP 2B done: buf_size=809500672
+[bg-io-debug] STEP 2C: checking scan_len...
+[bg-io-debug] Starting finalize step 2. vko_zero_copy=false, virt_base=0xffff800020000000, size=809500672, scan_len=33554432
+[bg-io-debug] STEP 2D: calling gguf::parse...
+[console] [GGUF-AI] parse: data_len=33554432
+[console] [GGUF-AI] Header: V3, 147 tensors, 30 metadata KV
+[gguf] Header: V3, 147 tensors, 30 metadata KV
+[console] [GGUF-AI] Parsing metadata pairs...
+[console] [GGUF-AI] Metadata parsed. alignment=32
+[console] [GGUF-AI] Parsing 147 tensor descriptors...
+[console] [GGUF-AI] Tensor descriptors parsed.
+[console] [GGUF-AI] GGUF parse complete! data_offset=7827744
+[gguf] Parsed: header_end=7827723, data_offset=7827744, alignment=32
+[bg-io-debug] STEP 2D done: parse success=true
+[bg-io-debug] gguf::parse returned
+[bg-io-debug] STEP 2E: locking slot.info...
+[bg-io-debug] locked slot.info
+[bg-io] GGUF metadata re-parsed successfully from RAM
+[bg-io-debug] STEP 2F: locking slot.info for clone...
+[bg-io-debug] STEP 2F done: cloned slot.info
+[fabric] Dynamic ZONE_TENSOR budget: budget=966MB stream=772MB working=772MB headroom=193MB free=6576MB total=7348MB
+[model-mgr] bg-finalize budget plan: stream=772MB working=772MB headroom=193MB free=6576MB total=7348MB
+[bg-io-debug] STEP 2G: calling register_attach_load_nonblocking...
+[console] [FABRIC-AI] register_nonblocking: starting for llama-3.2-1b-instruct-q4_k_m.gguf
+[console] [FABRIC-AI] register_nonblocking: reserving residency bytes...
+[console] [FABRIC-AI] register_nonblocking: inserting into models map...
+[console] [FABRIC-AI] register_nonblocking: updating name index...
+[console] [FABRIC-AI] Registered+Loaded in one shot: 0000005cf44cb1140000000000000000
+[fabric] Registered+Loaded in one shot: 0000005cf44cb1140000000000000000 (809500672 bytes)
+[bg-io-debug] STEP 2G done: register success=true
+[loader] Phase change: LOADING INTO FABRIC -> COMPLETE
+[params] Smart defaults: temp=0.20 top_k=20 top_p=0.85 max_tok=128 (size=770MB, quant=)
+[console] [AMP-AI] Compute Core 1: model detected, building engine...
+[console] [AI] LOADED "llama-3.2-1b-instruct-q4_k_m.gguf" — 100%%
+[amp] Compute Core 1: model detected, building engine...[bg-io] COMPLETE: slot=1 model_id=0000005cf44cb1140000000000000000 CRC=0xFBCEC507
+
+[amp] Core 1: RAM-streamed model detected
+[amp] Core 1 CR3: phys=0x85c31000
+[amp] Core 1: RAM-streamed memory mapped — proceeding to build engine
+[console] [AMP] Core 1: build_engine at virt_base=0xffff800020000000, size=809500672
+[amp] build_engine: virt_base=0xffff800020000000, max_safe_size=809500672
+[console] [AMP] Core 1: flushing TLB via CR3 reload...
+[console] [AMP] Core 1: TLB flushed, executing mfence...
+[console] [AMP] Core 1: calling ml::gguf::GgufParser::parse_header...
+[console] [ML-GGUF] parse_header: starting, data_len=809500672
+[console] [ML-GGUF] parse_header: header parsed. version=3, tensor_count=147, kv_count=30
+[console] [ML-GGUF] parse_header: parsing 30 metadata KVs...
+[console] [ML-GGUF] parse_metadata_value: parsing large string array (count=128256)
+[console] [ML-GGUF] parse_metadata_value: parsed lazy string array
+[console] [ML-GGUF] parse_metadata_value: parsed zero-copy array (type=Int32, count=128256)
+[console] [ML-GGUF] parse_metadata_value: parsing large string array (count=280147)
+[pipeline] Model load COMPLETE — ready for inference
+[console] [ML-GGUF] parse_metadata_value: parsed lazy string array
+[console] [ML-GGUF] parse_header: metadata parsed. alignment=32
+[console] [ML-GGUF] parse_header: parsing 147 tensor descriptors...
+[console] [ML-GGUF] parse_header: tensor descriptors parsed. data_offset calculations starting...
+[console] [ML-GGUF] parse_header: parse complete!
+[console] [AMP] Core 1: parse_header OK
+[gguf] Extracted vocabulary: 128256 tokens from tokenizer.ggml.tokens
+[gguf]   vocab[0] = ""!""
+[gguf]   vocab[1] = ""\"""
+[gguf]   vocab[2] = ""#""
+[gguf]   vocab[3] = ""$""
+[gguf]   vocab[256] = ""ĠĠ""
+[gguf]   vocab[1000] = ""indow""
+[gguf]   vocab[2000] = ""for""
+[amp] Vocabulary extracted: 128256 tokens
+[gguf] Extracted 280147 BPE merge pairs from tokenizer.ggml.merges
+[amp] BPE merges extracted: 280147 pairs
+[inference] Building tokenizer...
+[tokenizer] Using GGUF vocabulary (128256 tokens)
+[tokenizer] Loaded BPE merge pairs (GPT-2/tiktoken format)
+[tokenizer] Using merge-pair BPE encoding (Llama 3 / GPT-2)
+[tokenizer] GgufTokenizer: vocab=128256, max_tok_len=256, BOS=128000, EOS=128001, stops=3, space=U+0120, mode=MergePairs
+[gpu-heap] Phase 11: max_elem=8192 W=768KB I=32KB O=256KB offsets: W@0x30000 I@0xf0000 O@0xf8000 total=1248KB (80→312 pages)
+[FLIGHT-REC] Heap Config: max_elem=8192 total=1248KB old_pages=80 new_pages=312. Forcing Context & Cache Reset.
+[FLIGHT-REC] Heap Realloc: New Phys=0x1eb53b000 Virt=0xffff8001eb53b000 Size=312 pages (1248KB)\n[gpu-heap] Reallocated: phys=0x1eb53b000 312 pages (1248KB) W@0x30000 I@0xf0000 O@0xf8000
+[inference] GGUF params: ffn_hidden=8192, n_kv_heads=8 (n_heads=32)
+[inference] V5.0 dynamic: rope_theta=500000, norm_eps=0.00001, activation=silu, qkv_bias=false
+[inference] Config: vocab_size=128256 (tokenizer=128256, model_info=128256), dim=2048, layers=16
+[inference] context: GGUF=2048, passed_to_transformer=2048
+[tensor-map] Building map: virt_base=0xffff800020000000, data_offset=0x777120 (147 tensors)
+[tensor-map] [0] "rope_freqs.weight" @ 0xffff800020777120 size=128 dtype=F32 offset_in_data=0x0 dims=[32x1]
+[tensor-map] [1] "token_embd.weight" @ 0xffff8000207771a0 size=215470080 dtype=Q6_K offset_in_data=0x80 dims=[2048x128256]
+[tensor-map] [2] "blk.0.attn_norm.weight" @ 0xffff80002d4f41a0 size=8192 dtype=F32 offset_in_data=0xcd7d080 dims=[2048x1]
+[tensor-map] [146] "output_norm.weight" @ 0xffff8000502441a0 size=8192 dtype=F32 offset_in_data=0x2facd080 dims=[2048x1]
+[tensor-map] All tensors properly aligned.
+[AMP-DEBUG] Step 1: Allocating Transformer buffers...
+[AMP-DEBUG] Step 2: Binding quantized tensors...
+[transformer] Tied embeddings detected: using token_embd.weight for lm_head
+[transformer] KV cache: 128 MiB virtual (demand-paged, 16 layers × 2048 ctx)
+[kv-demand] reserved 4 MiB virtual at 0xffffca0000000000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0000400000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0000800000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0000c00000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0001000000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0001400000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0001800000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0001c00000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0002000000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0002400000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0002800000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0002c00000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0003000000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0003400000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0003800000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0003c00000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0004000000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0004400000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0004800000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0004c00000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0005000000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0005400000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0005800000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0005c00000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0006000000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0006400000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0006800000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0006c00000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0007000000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0007400000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0007800000
+[kv-demand] reserved 4 MiB virtual at 0xffffca0007c00000
+[router] GPU disabled: current model storage is not fully GPU-pinned
+[AMP-DEBUG] Pre-mapping GGTT Static Zone...
+[FLIGHT-REC] GGTT STATIC ZONE EXPLICITLY LOCKED: 147 entries, 195426 pages (781704KB)
+[AMP-DEBUG] Step 3: Initializing KV cache...
+[amp] Compute Core 1: READY — accepting prompts via IPC
+[amp] Enqueued CHAT prompt #1: "test" (queue depth: 1)
+[amp-diag] consume_prompt dequeued ID=1 len=0
+[amp] Processing request #1 (Chat): "test"
+[amp] Compute: prompt="test" max=128 temp=0.20
+[Q6-AE-COLD] armed=1 workers=2 shapes=3 mask=0x7 max=128256x8192 staging_bytes=1058816 alloc_cycles=528758 request1=PINNED_MAILBOX_Q6 pair_armed=0
+[EU-AT-MODE] request=1 schedule=PRODUCTION requested_mode_id=6 requested_mode=ISSUE_OVERLAP active_mode_id=6 active_mode=ISSUE_OVERLAP candidate_certified=0 candidate_disabled=0 fallback_mode=WEIGHT_CURSOR response_path=LIVE_TRANSFORMER
+[Q6-AE-PREFLIGHT] workers=2 mailbox=PER_WORKER_GENERATION completed=1 clean=1 claim_mask=0x0 mailbox_mask=0x0 cycles=6928 claim_cycles=5004 timeout=250000000 legacy_before=0x0 legacy_after=0x0 repairs=0 retransmits=0 result=PASS
+[Q6-AE-PREFLIGHT-WORKERS] issued0=1 claimed0=1 completed0=1 stage0=7 worker_epoch0=1 issued1=1 claimed1=1 completed1=1 stage1=7 worker_epoch1=1
+[Q6-AE-REQUEST] request=1 active=1 mode=PINNED_MAILBOX_Q6 workers=2 preflight=PASS
+[PAIR-AI-MODE] request=1 schedule=PRODUCTION requested_mode_id=1 requested_mode=DUAL_WALKER_FLUSH q6_active=1 previous_mode_id=0 active_mode_id=1 active_mode=DUAL_WALKER_FLUSH armed=1 disabled=0
+[PAIR-AI-WINDOW-BEGIN] request=1 schedule=PRODUCTION mode_id=1 mode=DUAL_WALKER_FLUSH enabled=1 cert_before=0
+[Q4K-ROWPOL] ROUND18C BEGIN shape=2048x2048 candidates=1/4 warmup=2 measured=7 resident_slots=2
+[Q4K-STATE] ROUND18F sample=1 dim_k=0 -> 2048 logical_input_bytes=8192 input_surface_bytes=32768 metadata_rebuild=0 calibration=1
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=76848 capacity=80896
+[Q4K-ROWPOL] ROUND18C candidate shape=2048x2048 rows=1 valid=1 completed=1 exact=1 clean=1 warm_median=7060292 switch_median=7107496 score=7107496 spread=256504
+[Q4K-ROWPOL] ROUND18C candidate shape=2048x2048 rows=4 supported=1 valid=1 completed=1 exact=1 clean=1 warm_median=7817982 switch_median=7803694 score=7817982 spread=190640
+[Q4K-ROWPOL] ROUND18C SELECT shape=2048x2048 rows=1 baseline_score=7107496 selected_score=7107496 measured_guard=256504 speedup_x1000=1000
+[Q4K-RESIDENT] ROUND18P INSTALL slot=1 arithmetic=FACTORED offset=0x14000 bytes=58688 capacity=114688
+[GPU-FREQ-TRUTH] ROUND18D shape=2048x2048 rows=1 requested=1000MHz min=1000MHz max=1000MHz end=1000MHz samples=92 submit_cycles=12150 fence_cycles=5423418 RPNSWREQ=0x1e000000 RP_CONTROL=0x00000d92 RPSTAT1=0x1e000000
+[Q4K-RESIDENT-A] ROUND18O sample=1 slots=2 installs=2 bytes=135536 switches=2 prod_switches=1 icache=2 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=1 params=38 dimk_transitions=1 rp0=38 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[Q4K-PERF-FIRST] shape=2048x2048 rows_per_thread=1 arithmetic=1 walker_threads=2048 vfe_threads=168 submit_cycles=12150 fence_cycles=5423418
+[Q4K-P-LIVE] mode=FACTORED first_shape=2048x2048 certification=ROUND18O_EVIDENCE_LOCK request_path=production
+[Q4K-ROWPOL] ROUND18C BEGIN shape=512x2048 candidates=1/4 warmup=2 measured=7 resident_slots=2
+[Q4K-ROWPOL] ROUND18C candidate shape=512x2048 rows=1 valid=1 completed=1 exact=1 clean=1 warm_median=2387604 switch_median=2374524 score=2387604 spread=99570
+[Q4K-ROWPOL] ROUND18C candidate shape=512x2048 rows=4 supported=1 valid=1 completed=1 exact=1 clean=1 warm_median=2230452 switch_median=2283486 score=2283486 spread=237386
+[Q4K-ROWPOL] ROUND18C SELECT shape=512x2048 rows=1 baseline_score=2387604 selected_score=2387604 measured_guard=237386 speedup_x1000=1000
+[GPU-FREQ-TRUTH] ROUND18D shape=512x2048 rows=1 requested=1000MHz min=1000MHz max=1000MHz end=1000MHz samples=34 submit_cycles=15266 fence_cycles=1898894 RPNSWREQ=0x1e000000 RP_CONTROL=0x00000d92 RPSTAT1=0x1e000000
+[Q4K-RESIDENT-A] ROUND18O sample=2 slots=2 installs=2 bytes=135536 switches=4 prod_switches=2 icache=4 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=2 params=76 dimk_transitions=1 rp0=76 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[Q4K-PERF-FIRST] shape=512x2048 rows_per_thread=1 arithmetic=1 walker_threads=512 vfe_threads=168 submit_cycles=15266 fence_cycles=1898894
+[gemm] AVX2+FMA+F16C detection: AVAILABLE (F16C=yes)
+[Q6-AE-LIVE] shape=512x2048 workers=2 completed=1 exact=1 clean=1 cycles=657370 claim_cycles=3996 reference_cycles=918928 cert_mask=0x1 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=512x2048 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=2 epoch1=2 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[Q4K-RESIDENT-A] ROUND18O sample=3 slots=2 installs=2 bytes=135536 switches=4 prod_switches=2 icache=4 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=3 params=77 dimk_transitions=1 rp0=77 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[EU-BE-CAPTURE] captured=1 source=PAIR_GATE shape=8192x2048 input_f32=2048 weight_virt=0xffff80002e2161a0
+[FFN-BP-CAPTURE] captured=1 source=PRODUCTION_GATE_UP shape=8192x2048 input_f32=2048 gate=0xffff80002e2161a0 up=0xffff80002eb161a0
+[Q4K-RESIDENT] ROUND18P INSTALL slot=1 arithmetic=FACTORED offset=0x14000 bytes=58672 capacity=114688
+[EU-AT-CERT] mode_id=6 mode=ISSUE_OVERLAP completed=1 exact=1 clean=1 shape=8192x2048 rows=4 reference=two_weight_cursor_singles result=PASS
+[Q4K-RESIDENT] ROUND18P INSTALL slot=1 arithmetic=FACTORED offset=0x14000 bytes=58688 capacity=114688
+[PAIR-AI-CERT] mode_id=1 mode=DUAL_WALKER_FLUSH completed=1 exact=1 clean=1 shape=8192x2048 rows=4 inter_media_flush=1 reference=two_single_factored cert_cycles=40976424 result=PASS
+[PAIR-AI-LIVE] mode_id=1 mode=DUAL_WALKER_FLUSH shape=8192x2048 rows=4 walkers=2 inter_media_flush=1 submissions=1 fences=1 request_path=production
+[Q6-AE-LIVE] shape=2048x8192 workers=2 completed=1 exact=1 clean=1 cycles=9729308 claim_cycles=6424 reference_cycles=14902278 cert_mask=0x3 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=2048x8192 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=3 epoch1=3 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[Q4K-ROWPOL] ROUND18C BEGIN shape=2048x8192 candidates=1/4 warmup=2 measured=7 resident_slots=2
+[Q4K-STATE] ROUND18F sample=2 dim_k=2048 -> 8192 logical_input_bytes=32768 input_surface_bytes=32768 metadata_rebuild=0 calibration=1
+[Q4K-ROWPOL] ROUND18C candidate shape=2048x8192 rows=1 valid=1 completed=1 exact=1 clean=1 warm_median=26795326 switch_median=26779316 score=26795326 spread=365408
+[Q4K-ROWPOL] ROUND18C candidate shape=2048x8192 rows=4 supported=1 valid=1 completed=1 exact=1 clean=1 warm_median=29737556 switch_median=29840752 score=29840752 spread=158218
+[Q4K-ROWPOL] ROUND18C SELECT shape=2048x8192 rows=1 baseline_score=26795326 selected_score=26795326 measured_guard=365408 speedup_x1000=1000
+[GPU-FREQ-TRUTH] ROUND18D shape=2048x8192 rows=1 requested=1000MHz min=1000MHz max=1000MHz end=1000MHz samples=346 submit_cycles=12500 fence_cycles=21185186 RPNSWREQ=0x1e000000 RP_CONTROL=0x00000d92 RPSTAT1=0x1e000000
+[Q4K-PERF-FIRST] shape=2048x8192 rows_per_thread=1 arithmetic=1 walker_threads=2048 vfe_threads=168 submit_cycles=12500 fence_cycles=21185186
+[Q4K-STATE] ROUND18F sample=3 dim_k=8192 -> 2048 logical_input_bytes=8192 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[Q4K-STATE] ROUND18F sample=4 dim_k=2048 -> 8192 logical_input_bytes=32768 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[Q4K-STATE] ROUND18F sample=5 dim_k=8192 -> 2048 logical_input_bytes=8192 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[Q4K-STATE] ROUND18F sample=6 dim_k=2048 -> 8192 logical_input_bytes=32768 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[Q4K-STATE] ROUND18F sample=7 dim_k=8192 -> 2048 logical_input_bytes=8192 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[Q4K-STATE] ROUND18F sample=8 dim_k=2048 -> 8192 logical_input_bytes=32768 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[Q6-AE-LIVE] shape=128256x2048 workers=2 completed=1 exact=1 clean=1 cycles=153736758 claim_cycles=2462 reference_cycles=246359150 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=128256x2048 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=18 epoch1=18 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[PROFILER] Token 1: Fwd=1.25B Attn=235.15M FFN=857.49M Norm=934.1K Alloc=34c Embed=16.0K LMH=154.16M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=2048 slots=2 installs=4 bytes=252896 switches=7 prod_switches=3 icache=7 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=2048 params=1822 dimk_transitions=341 rp0=1822 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 25: Fwd=1.25B Attn=242.01M FFN=852.94M Norm=989.9K Alloc=30c Embed=19.7K LMH=154.46M Samp=0c
+[PROFILER] Token 50: Fwd=1.25B Attn=247.65M FFN=850.97M Norm=1.01M Alloc=32c Embed=16.0K LMH=154.29M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=5120 slots=2 installs=4 bytes=252896 switches=7 prod_switches=3 icache=7 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=5120 params=4382 dimk_transitions=853 rp0=4382 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[Q4K-STATE] ROUND18F sample=1024 dim_k=2048 -> 8192 logical_input_bytes=32768 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[PROFILER] Token 75: Fwd=1.27B Attn=255.48M FFN=859.40M Norm=987.4K Alloc=32c Embed=13.0K LMH=154.37M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=8192 slots=2 installs=4 bytes=252896 switches=7 prod_switches=3 icache=7 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=8192 params=6942 dimk_transitions=1365 rp0=6942 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 100: Fwd=1.27B Attn=262.01M FFN=856.93M Norm=963.2K Alloc=34c Embed=15.8K LMH=153.85M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=11264 slots=2 installs=4 bytes=252896 switches=7 prod_switches=3 icache=7 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=11264 params=9502 dimk_transitions=1877 rp0=9502 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 125: Fwd=1.28B Attn=280.71M FFN=846.31M Norm=1.04M Alloc=34c Embed=21.0K LMH=153.88M Samp=0c
+[Q4K-STATE] ROUND18F sample=2048 dim_k=2048 -> 8192 logical_input_bytes=32768 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[PHASE-K] prompt_tokens=2 generated_tokens=128 prefill_cycles=4394378746 prefill_avg_cycles=2197189373 decode_cycles=162524240650 decode_avg_cycles=1269720630 prefill_share_x1000=26 decode_share_x1000=973 tsc_assumption_hz=2000000000
+[amp] Compute: done, 128 tokens generated
+[router] Dispatch stats: gpu=12480 cpu=2210 errors=0
+[router] === Hybrid Compute Router ===
+[router] Mode: GPU preferred
+[router] GPU available: yes
+[router] GPU dispatches: 12480
+[router] CPU dispatches: 2210
+[router] GPU errors (fallback): 0
+[CPU-GEMV-CENSUS] ===== routed CPU GEMV profile =====
+[CPU-GEMV-CENSUS] shape=512x2048 dtype_id=14 count=1040 total_cycles=771818066 avg_cycles=742132 min_cycles=632252 max_cycles=10791128
+[CPU-GEMV-CENSUS] shape=2048x8192 dtype_id=14 count=1040 total_cycles=10937761538 avg_cycles=10517078 min_cycles=9624350 max_cycles=32936364
+[CPU-GEMV-CENSUS] shape=128256x2048 dtype_id=14 count=130 total_cycles=20357958090 avg_cycles=156599677 min_cycles=153705814 max_cycles=409702168
+[CPU-POLICY] ===== calibrated Q6_K worker policies =====
+[CPU-POLICY] no Q6_K policies calibrated
+[BOTTLENECK-P] scope=decode_only decode_cycles=162524240650 q4k_fence_cycles=121561667166 q4k_share_x1000=747 generated_tokens=128 q4k_cycles_per_token=949700524
+[BOTTLENECK-P-SHAPE] index=0 shape=2048x2048 dispatches=4096 cycles=22474327008 avg_fence_cycles=5486896 cycles_per_token=175580679 share_q4k_x1000=184 share_decode_x1000=138
+[BOTTLENECK-P-SHAPE] index=1 shape=512x2048 dispatches=3072 cycles=5502951636 avg_fence_cycles=1791325 cycles_per_token=42991809 share_q4k_x1000=45 share_decode_x1000=33
+[BOTTLENECK-P-SHAPE] index=2 shape=8192x2048 dispatches=4096 cycles=71867963426 avg_fence_cycles=17545889 cycles_per_token=561468464 share_q4k_x1000=591 share_decode_x1000=442
+[BOTTLENECK-P-SHAPE] index=3 shape=2048x8192 dispatches=1024 cycles=21716425096 avg_fence_cycles=21207446 cycles_per_token=169659571 share_q4k_x1000=178 share_decode_x1000=133
+[BOTTLENECK-AI-FOCUS] request=1 shape=8192x2048 logical_dispatches=4096 physical_pairs=2048 fence_cycles=71867963426 avg_per_logical=17545889 cycles_per_token=561468464 share_decode_x1000=442 rows=4 arithmetic=FACTORED pair=DUAL_WALKER_FLUSH transport=SFID[Q4K-P-SUM] device=0x9b41 certified_device=0x9b41 production_mode=FACTORED factored_armed=1 gate_ran=0 gate_passed=0 factored_disabled=0 failures=0 scalar_retries=0 slots=2 installs=4 switches=7 prod_switches=3 icache=7 hot_fallbacks=0
+[Q4K-P-SHAPE] index=0 shape=2048x2048 dispatches=4160 factored=4160 scalar=0 total_fence_cycles=22824481572 avg_fence_cycles=5486654
+[Q4K-P-SHAPE] index=1 shape=512x2048 dispatches=3120 factored=3120 scalar=0 total_fence_cycles=5589096068 avg_fence_cycles=1791376
+[Q4K-P-SHAPE] index=2 shape=8192x2048 dispatches=4160 factored=4160 scalar=0 total_fence_cycles=72990597380 avg_fence_cycles=17545816
+[Q4K-P-SHAPE] index=3 shape=2048x8192 dispatches=1040 factored=1040 scalar=0 total_fence_cycles=22055579442 avg_fence_cycles=21207287
+[Q6-AE-SUM] req=1 active=1 response=1 qualified=1 attempts=2210 completed=2210 fail=0 fallback=0 timeout=0 exact_fail=0 cert=0x7 disabled=0
+[Q6-AE-PERF] total_cycles=31633846358 avg_cycles=14313957 reference_cycles=262180356 next=PINNED_MAILBOX_Q6
+[POOL-AE-SUM] capacity=2 quant_dispatches=2210 mailbox_dispatches=2210 max_requested_workers=2 pool_poisoned=0 request_q6_pool=PINNED_MAILBOX_GENERATION parks=0
+[POOL-AE-EPOCH] started0=2211 completed0=2211 started1=2211 completed1=2211 preflight_runs=1 preflight_failures=0
+[POOL-AE-MAILBOX] issued0=2211 claimed0=2211 completed0=2211 issued1=2211 claimed1=2211 completed1=2211 mode=0 claim_retransmits=0 claim_timeouts=0 completion_timeouts=0 max_claim_cycles=453938
+[POOL-AE-DIAG] ticket_issued0=0 ticket_ack0=0 ticket_issued1=0 ticket_ack1=0 ticket_mismatches=0 legacy_repairs=0 wake_epoch=6635 wake_signals=6634
+[PAIR-AI-SUM] attempts=2080 completed=2080 failures=0 logical_gemvs=4160 cert_mask=0x1 cert_failures=0
+[PAIR-AI-IO] pair_submissions=2080 pair_fences=2080 gross_saved=2080 cert_ref_submissions=2 net_saved=2078
+[PAIR-AI-MODE-SUM] flush_attempts=2080 flush_completed=2080 compact_attempts=0 compact_completed=0
+[PAIR-AI-MODE-PERF] flush_avg_full=37289828 flush_avg_fence=35091633 compact_avg_full=0 compact_avg_fence=0 flush_cert=40976424 compact_cert=0
+[PAIR-AI-PERF] full=77562842942 avg_full=37289828 submit=30817466 avg_submit=14816 fence=72990597380 avg_fence=35091633
+[PAIR-AI-CERT-SUM] cert_mask=0x1 failures=0 reference=two_single_factored modes=FLUSH,COMPACT
+[PAIR-AI-WINDOW] request=1 mode_id=1 mode=DUAL_WALKER_FLUSH enabled=1 attempts=2080 completed=2080 failures=0 logical_gemvs=4160 cert_before=0 cert_after=1 cert_failures=0
+[PAIR-AI-IO-WINDOW] request=1 pair_submissions=2080 pair_fences=2080 gross_saved=2080 cert_ref_submissions=2 net_saved=2078
+[PAIR-AI-WINDOW-PERF] request=1 mode_id=1 full=77562842942 avg_full=37289828 submit=30817466 avg_submit=14816 fence=72990597380 avg_fence=35091633
+[PAIR-AI-SHAPE-WINDOW] request=1 mode_id=1 mode=DUAL_WALKER_FLUSH logical_dispatches=4160 physical_pairs=2080 fence_cycles=72990597380 avg_per_logical=17545816 avg_per_pair=35091633
+[PAIR-AI-ROUTER-WINDOW] request=1 mode_id=1 mode=DUAL_WALKER_FLUSH fallbacks=0 quarantines=0 disabled=0
+[PAIR-AI-ROUTER] active_mode_id=1 active_mode=DUAL_WALKER_FLUSH armed=1 disabled=0 fallbacks=0 quarantines=0 arm_events=1 mode_switches=1 schedule=PRODUCTION
+[EU-AT-WINDOW] request=1 mode_id=6 mode=ISSUE_OVERLAP enabled=1 attempts=2080 completed=2080 failures=0 logical_gemvs=4160 cert_before=0 cert_after=1 cert_ref_submissions=2
+[EU-AT-SUM] control_requests=0 candidate_requests=1 attempts=2080 completed=2080 failures=0 cert=1 cert_failures=0 cert_ref_submissions=2 disabled=0 promoted=1
+[PAIR-AI-STAGE] request=1 schedule=PRODUCTION pair_active=1 pair_now_armed=1 mode_id=1 mode=DUAL_WALKER_FLUSH q6_request_active=1 q6_qualified=1 q6_disabled=0 pair_disabled=0
+[Q4K-BY-LAB] request=1 stage=0 mode=SLM_RECONSTRUCTION_WRITE_FOOTPRINT_CAUSAL shape=8192x2048 groups=256 threads_per_group=8 repair=SIMD1_EXACT_RECONSTRUCTION production_unchanged=1
+[ctx-desc] desc=0x00000001_021e4109 addr_mode=1 priv=1 valid=1 restore=0
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x140 DWs=80 Rearming=false BatchMode=false
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=11872 capacity=80896
+[Q4K-BV-CODE] variant=12 install=1 bytes=11872 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=11872 capacity=80896
+[Q4K-BV-CODE] variant=13 install=1 bytes=11872 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[Q4K-BY-FOOTPRINT] mode=UNSAFE completed=1 clean=1 cycles=4766514 threads=2048 observed_sentinel=0 observed_tile255=2048 lane1_sentinel=2048 lane2_tile255=2048 slot_exact=2048 tile255=0x3e518295 sentinel=0xa18b18b1 ambiguous=0
+[Q4K-BY-FOOTPRINT] mode=EXACT completed=1 clean=1 cycles=4606444 threads=2048 observed_sentinel=2048 observed_tile255=0 lane1_sentinel=2048 lane2_tile255=2048 slot_exact=2048 tile255=0x3e518295 sentinel=0xa18b18b1 ambiguous=0
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=37424 capacity=80896
+[Q4K-BV-CODE] variant=14 install=1 bytes=37424 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=37424 capacity=80896
+[Q4K-BV-CODE] variant=15 install=1 bytes=37424 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[Q4K-BY-BITMAP] mode=UNSAFE completed=1 clean=1 exact=0 cycles=23136928 mismatches=2048 mod0=2048 mod1=0 mod2=0 mod3=0 first=0 expected=0xbc61dbde actual=0x3c4c5f86
+[Q4K-BY-BITMAP] mode=EXACT completed=1 clean=1 exact=1 cycles=22364738 mismatches=0 mod0=0 mod1=0 mod2=0 mod3=0 first=4294967295 expected=0x00000000 actual=0x00000000
+[Q4K-BY-CAUSAL] footprint_signature=1 bitmap_signature=1 fixed_signature=1 root_proven=1 control_cycles=22413276 unsafe_cycles=23136928 exact_cycles=22364738 repair=SIMD1_EXACT_RECONSTRUCTION legacy_helper_global_change=0 promoted=0
+[Q4K-BY-SUM] request=1 mask=0x1 root_proven=1 runs=4 failures=0 bit_checks=32768 perf_1p10=0 architecture_1p50=0 production=DUAL_WALKER_FLUSH promoted=0
+[Q4K-BY-STAGE] request=1 root_proven=1 correctness_mask=0x1 perf_1p10=0 architecture_1p50=0 power_qualified=0 promoted=0 next=COOPERATIVE_Q4_RECONSTRUCTION_REPAIR_QUALIFICATION
+[amp-diag] Inference loop cleared active request
+[amp] Enqueued CHAT prompt #2: "test" (queue depth: 1)
+[amp-diag] consume_prompt dequeued ID=2 len=0
+[amp] Processing request #2 (Chat): "test"
+[amp] Compute: prompt="test" max=128 temp=0.20
+[EU-AT-MODE] request=2 schedule=PRODUCTION requested_mode_id=6 requested_mode=ISSUE_OVERLAP active_mode_id=6 active_mode=ISSUE_OVERLAP candidate_certified=1 candidate_disabled=0 fallback_mode=WEIGHT_CURSOR response_path=LIVE_TRANSFORMER
+[Q6-AE-PREFLIGHT] workers=2 mailbox=PER_WORKER_GENERATION completed=1 clean=1 claim_mask=0x0 mailbox_mask=0x0 cycles=4724 claim_cycles=3068 timeout=250000000 legacy_before=0x0 legacy_after=0x0 repairs=0 retransmits=0 result=PASS
+[Q6-AE-PREFLIGHT-WORKERS] issued0=2212 claimed0=2212 completed0=2212 stage0=7 worker_epoch0=2212 issued1=2212 claimed1=2212 completed1=2212 stage1=7 worker_epoch1=2212
+[Q6-AE-REQUEST] request=2 active=1 mode=PINNED_MAILBOX_Q6 workers=2 preflight=PASS
+[PAIR-AI-MODE] request=2 schedule=PRODUCTION requested_mode_id=1 requested_mode=DUAL_WALKER_FLUSH q6_active=1 previous_mode_id=1 active_mode_id=1 active_mode=DUAL_WALKER_FLUSH armed=1 disabled=0
+[PAIR-AI-WINDOW-BEGIN] request=2 schedule=PRODUCTION mode_id=1 mode=DUAL_WALKER_FLUSH enabled=1 cert_before=1
+[Q4K-RESIDENT] ROUND18P INSTALL slot=1 arithmetic=FACTORED offset=0x14000 bytes=58688 capacity=114688
+[Q6-AE-LIVE] shape=512x2048 workers=2 completed=1 exact=1 clean=1 cycles=803654 claim_cycles=4972 reference_cycles=0 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=512x2048 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=2213 epoch1=2213 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[Q6-AE-LIVE] shape=2048x8192 workers=2 completed=1 exact=1 clean=1 cycles=9653834 claim_cycles=6302 reference_cycles=0 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=2048x8192 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=2214 epoch1=2214 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[Q6-AE-LIVE] shape=128256x2048 workers=2 completed=1 exact=1 clean=1 cycles=153712488 claim_cycles=2376 reference_cycles=0 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=128256x2048 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=2229 epoch1=2229 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[PROFILER] Token 1: Fwd=1.24B Attn=235.59M FFN=853.52M Norm=1.08M Alloc=32c Embed=17.6K LMH=154.44M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=14336 slots=1 installs=9 bytes=410176 switches=8 prod_switches=4 icache=8 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=14336 params=12067 dimk_transitions=2389 rp0=12067 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 25: Fwd=1.25B Attn=242.04M FFN=852.69M Norm=922.9K Alloc=34c Embed=20.2K LMH=154.26M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=17408 slots=1 installs=9 bytes=410176 switches=8 prod_switches=4 icache=8 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=17408 params=14627 dimk_transitions=2901 rp0=14627 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 50: Fwd=1.27B Attn=253.63M FFN=858.53M Norm=1.18M Alloc=30c Embed=16.8K LMH=154.36M Samp=0c
+[Q4K-STATE] ROUND18F sample=3072 dim_k=2048 -> 8192 logical_input_bytes=32768 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[PROFILER] Token 75: Fwd=1.27B Attn=254.63M FFN=860.11M Norm=940.5K Alloc=28c Embed=12.4K LMH=154.45M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=20480 slots=1 installs=9 bytes=410176 switches=8 prod_switches=4 icache=8 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=20480 params=17187 dimk_transitions=3413 rp0=17187 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 100: Fwd=1.27B Attn=262.31M FFN=854.78M Norm=1.04M Alloc=36c Embed=16.3K LMH=153.90M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=23552 slots=1 installs=9 bytes=410176 switches=8 prod_switches=4 icache=8 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=23552 params=19747 dimk_transitions=3925 rp0=19747 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[Q4K-STATE] ROUND18F sample=4096 dim_k=2048 -> 8192 logical_input_bytes=32768 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[PROFILER] Token 125: Fwd=1.28B Attn=281.50M FFN=845.21M Norm=1.08M Alloc=36c Embed=18.7K LMH=153.97M Samp=0c
+[PHASE-K] prompt_tokens=2 generated_tokens=128 prefill_cycles=2525015808 prefill_avg_cycles=1262507904 decode_cycles=162502296598 decode_avg_cycles=1269549192 prefill_share_x1000=15 decode_share_x1000=984 tsc_assumption_hz=2000000000
+[amp] Compute: done, 128 tokens generated
+[router] Dispatch stats: gpu=24960 cpu=4420 errors=0
+[router] === Hybrid Compute Router ===
+[router] Mode: GPU preferred
+[router] GPU available: yes
+[router] GPU dispatches: 24960
+[router] CPU dispatches: 4420
+[router] GPU errors (fallback): 0
+[CPU-GEMV-CENSUS] ===== routed CPU GEMV profile =====
+[CPU-GEMV-CENSUS] shape=512x2048 dtype_id=14 count=2080 total_cycles=1538630422 avg_cycles=739726 min_cycles=623756 max_cycles=10791128
+[CPU-GEMV-CENSUS] shape=2048x8192 dtype_id=14 count=2080 total_cycles=21873719994 avg_cycles=10516211 min_cycles=9560798 max_cycles=32936364
+[CPU-GEMV-CENSUS] shape=128256x2048 dtype_id=14 count=260 total_cycles=40463489608 avg_cycles=155628806 min_cycles=153657670 max_cycles=409702168
+[CPU-POLICY] ===== calibrated Q6_K worker policies =====
+[CPU-POLICY] no Q6_K policies calibrated
+[BOTTLENECK-P] scope=decode_only decode_cycles=162502296598 q4k_fence_cycles=121571525262 q4k_share_x1000=748 generated_tokens=128 q4k_cycles_per_token=949777541
+[BOTTLENECK-P-SHAPE] index=0 shape=2048x2048 dispatches=4096 cycles=22481134112 avg_fence_cycles=5488558 cycles_per_token=175633860 share_q4k_x1000=184 share_decode_x1000=138
+[BOTTLENECK-P-SHAPE] index=1 shape=512x2048 dispatches=3072 cycles=5505130188 avg_fence_cycles=1792034 cycles_per_token=43008829 share_q4k_x1000=45 share_decode_x1000=33
+[BOTTLENECK-P-SHAPE] index=2 shape=8192x2048 dispatches=4096 cycles=71870649718 avg_fence_cycles=17546545 cycles_per_token=561489450 share_q4k_x1000=591 share_decode_x1000=442
+[BOTTLENECK-P-SHAPE] index=3 shape=2048x8192 dispatches=1024 cycles=21714611244 avg_fence_cycles=21205675 cycles_per_token=169645400 share_q4k_x1000=178 share_decode_x1000=133
+[BOTTLENECK-AI-FOCUS] request=2 shape=8192x2048 logical_dispatches=4096 physical_pairs=2048 fence_cycles=71870649718 avg_per_logical=17546545 cycles_per_token=561489450 share_decode_x1000=442 rows=4 arithmetic=FACTORED pair=DUAL_WALKER_FLUSH transport=SFID[Q4K-P-SUM] device=0x9b41 certified_device=0x9b41 production_mode=FACTORED factored_armed=1 gate_ran=0 gate_passed=0 factored_disabled=0 failures=0 scalar_retries=0 slots=1 installs=9 switches=8 prod_switches=4 icache=8 hot_fallbacks=0
+[Q4K-P-SHAPE] index=0 shape=2048x2048 dispatches=8320 factored=8320 scalar=0 total_fence_cycles=45656809948 avg_fence_cycles=5487597
+[Q4K-P-SHAPE] index=1 shape=512x2048 dispatches=6240 factored=6240 scalar=0 total_fence_cycles=11180254930 avg_fence_cycles=1791707
+[Q4K-P-SHAPE] index=2 shape=8192x2048 dispatches=8320 factored=8320 scalar=0 total_fence_cycles=145984143736 avg_fence_cycles=17546171
+[Q4K-P-SHAPE] index=3 shape=2048x8192 dispatches=2080 factored=2080 scalar=0 total_fence_cycles=44109432370 avg_fence_cycles=21206457
+[Q6-AE-SUM] req=2 active=1 response=1 qualified=1 attempts=2210 completed=2210 fail=0 fallback=0 timeout=0 exact_fail=0 cert=0x7 disabled=0
+[Q6-AE-PERF] total_cycles=31638976464 avg_cycles=14316278 reference_cycles=0 next=PINNED_MAILBOX_Q6
+[POOL-AE-SUM] capacity=2 quant_dispatches=4420 mailbox_dispatches=4420 max_requested_workers=2 pool_poisoned=0 request_q6_pool=PINNED_MAILBOX_GENERATION parks=0
+[POOL-AE-EPOCH] started0=4422 completed0=4422 started1=4422 completed1=4422 preflight_runs=2 preflight_failures=0
+[POOL-AE-MAILBOX] issued0=4422 claimed0=4422 completed0=4422 issued1=4422 claimed1=4422 completed1=4422 mode=0 claim_retransmits=0 claim_timeouts=0 completion_timeouts=0 max_claim_cycles=453938
+[POOL-AE-DIAG] ticket_issued0=0 ticket_ack0=0 ticket_issued1=0 ticket_ack1=0 ticket_mismatches=0 legacy_repairs=0 wake_epoch=13269 wake_signals=13268
+[PAIR-AI-SUM] attempts=4160 completed=4160 failures=0 logical_gemvs=8320 cert_mask=0x1 cert_failures=0
+[PAIR-AI-IO] pair_submissions=4160 pair_fences=4160 gross_saved=4160 cert_ref_submissions=2 net_saved=4158
+[PAIR-AI-MODE-SUM] flush_attempts=4160 flush_completed=4160 compact_attempts=0 compact_completed=0
+[PAIR-AI-MODE-PERF] flush_avg_full=37287298 flush_avg_fence=35092342 compact_avg_full=0 compact_avg_fence=0 flush_cert=40976424 compact_cert=0
+[PAIR-AI-PERF] full=155115161558 avg_full=37287298 submit=61500850 avg_submit=14783 fence=145984143736 avg_fence=35092342
+[PAIR-AI-CERT-SUM] cert_mask=0x1 failures=0 reference=two_single_factored modes=FLUSH,COMPACT
+[PAIR-AI-WINDOW] request=2 mode_id=1 mode=DUAL_WALKER_FLUSH enabled=1 attempts=2080 completed=2080 failures=0 logical_gemvs=4160 cert_before=1 cert_after=1 cert_failures=0
+[PAIR-AI-IO-WINDOW] request=2 pair_submissions=2080 pair_fences=2080 gross_saved=2080 cert_ref_submissions=0 net_saved=2080
+[PAIR-AI-WINDOW-PERF] request=2 mode_id=1 full=77552318616 avg_full=37284768 submit=30683384 avg_submit=14751 fence=72993546356 avg_fence=35093051
+[PAIR-AI-SHAPE-WINDOW] request=2 mode_id=1 mode=DUAL_WALKER_FLUSH logical_dispatches=4160 physical_pairs=2080 fence_cycles=72993546356 avg_per_logical=17546525 avg_per_pair=35093051
+[PAIR-AI-ROUTER-WINDOW] request=2 mode_id=1 mode=DUAL_WALKER_FLUSH fallbacks=0 quarantines=0 disabled=0
+[PAIR-AI-ROUTER] active_mode_id=1 active_mode=DUAL_WALKER_FLUSH armed=1 disabled=0 fallbacks=0 quarantines=0 arm_events=1 mode_switches=1 schedule=PRODUCTION
+[EU-AT-WINDOW] request=2 mode_id=6 mode=ISSUE_OVERLAP enabled=1 attempts=2080 completed=2080 failures=0 logical_gemvs=4160 cert_before=1 cert_after=1 cert_ref_submissions=0
+[EU-AT-SUM] control_requests=0 candidate_requests=2 attempts=4160 completed=4160 failures=0 cert=1 cert_failures=0 cert_ref_submissions=2 disabled=0 promoted=1
+[PAIR-AI-STAGE] request=2 schedule=PRODUCTION pair_active=1 pair_now_armed=1 mode_id=1 mode=DUAL_WALKER_FLUSH q6_request_active=1 q6_qualified=1 q6_disabled=0 pair_disabled=0
+[Q4K-BY-LAB] request=2 stage=1 mode=REPAIRED_GATE_UP_QUALIFICATION shape=8192x2048 groups=256 threads_per_group=8 repair=SIMD1_EXACT_RECONSTRUCTION production_unchanged=1
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x140 DWs=80 Rearming=false BatchMode=false
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=37424 capacity=80896
+[Q4K-BV-CODE] variant=15 install=1 bytes=37424 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[Q4K-BY-CASE] req=2 stage=1 run=0 matrix=GATE pattern=0 order=B_C completed=1 exact=1 clean=1 b_cycles=21463966 c_cycles=22408302 mismatch=4294967295 expected=0x00000000 actual=0x00000000
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=37424 capacity=80896
+[Q4K-BV-CODE] variant=15 install=1 bytes=37424 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[Q4K-BY-CASE] req=2 stage=1 run=1 matrix=GATE pattern=0 order=C_B completed=1 exact=1 clean=1 b_cycles=21347906 c_cycles=22297762 mismatch=4294967295 expected=0x00000000 actual=0x00000000
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x140 DWs=80 Rearming=false BatchMode=false
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=37424 capacity=80896
+[Q4K-BV-CODE] variant=15 install=1 bytes=37424 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[Q4K-BY-CASE] req=2 stage=1 run=2 matrix=UP pattern=0 order=B_C completed=1 exact=1 clean=1 b_cycles=21327696 c_cycles=22354546 mismatch=4294967295 expected=0x00000000 actual=0x00000000
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=37424 capacity=80896
+[Q4K-BV-CODE] variant=15 install=1 bytes=37424 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[Q4K-BY-CASE] req=2 stage=1 run=3 matrix=UP pattern=0 order=C_B completed=1 exact=1 clean=1 b_cycles=20958758 c_cycles=22350884 mismatch=4294967295 expected=0x00000000 actual=0x00000000
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x140 DWs=80 Rearming=false BatchMode=false
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=37424 capacity=80896
+[Q4K-BV-CODE] variant=15 install=1 bytes=37424 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[Q4K-BY-CASE] req=2 stage=1 run=4 matrix=GATE pattern=0 order=B_C completed=1 exact=1 clean=1 b_cycles=20926620 c_cycles=22163538 mismatch=4294967295 expected=0x00000000 actual=0x00000000
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=37424 capacity=80896
+[Q4K-BV-CODE] variant=15 install=1 bytes=37424 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x28 DWs=10 Rearming=false BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[Q4K-BY-CASE] req=2 stage=1 run=5 matrix=GATE pattern=0 order=C_B completed=1 exact=1 clean=1 b_cycles=21135100 c_cycles=22309004 mismatch=4294967295 expected=0x00000000 actual=0x00000000
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x140 DWs=80 Rearming=false BatchMode=false
+[Q4K-RESIDENT] ROUND18P INSTALL slot=0 arithmetic=SCALAR offset=0x400 bytes=37424 capacity=80896
+[Q4K-BV-CODE] variant=15 install=1 bytes=37424 slot=0x400 capacity=80896
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e4109 Tail=0x158 DWs=86 Rearming=false BatchMode=false
+[intel-gpgpu] Fence timeout: expected 0x000051d0, fence_dw8=0x00000000, eu_dw0=0x00000000
+[intel-gpgpu] STAGE-DIAG: sync[0..3]=0x00000000 0x00000000 0x00000000 0x00000000
+[intel-gpgpu] FENCE-DIAG: HEAD=0x140 TAIL=0x158 INSTDONE=0xffddffff ACTHD=0x140 EIR=0x0 FAULT=0x0
+[intel-gpu] === AUTO-RECOVERY: Resetting render engine ===
+[FLIGHT-REC] Recovery #1: Wiping ELSP context and forcing state rebuild. GGTT_bump=195426 GGTT_cache_count=147 was_batch=false
+[FLIGHT-REC] GGTT dynamic flush: 0 dynamic entries wiped, bump reset to 195426 (static=147 entries)
+[intel-gpu] MOCS[2] Gen9-BC: control=0x0000003b l3=0x0030
+[intel-lrc] PDP0-3=0x1eb539000 (all valid, PPGTT active)
+[intel-gpu] Post-recovery GFX_MODE=0x00008001 ELSP=true
+[intel-gpu] Recovery SUCCEEDED — ELSP ready
+[FLIGHT-REC] ELSP Submit: Ctx_ID=1 Desc=0x00000001_021e410f Tail=0x318 DWs=198 Rearming=true BatchMode=false
+[EU-AZ-L3-RESTORE] requested=0x60000120 submitted=1 completed=1 readback=0x60000120 exact=1
+[Q4K-BY-CASE] req=2 stage=1 run=6 matrix=UP pattern=0 order=B_C completed=0 exact=0 clean=0 b_cycles=21327340 c_cycles=0 mismatch=0 expected=0xbd804b76 actual=0x00000000
+[Q4K-BY-DIST] request=2 stage=1 exact_runs=6 target=8 b_med=0 c_med=0 ratio_med=0 b_trim=0 c_trim=0 ratio_trim=0 ratio_p90=0 ratio_bc=0 ratio_cb=0 order_delta=0 stats_valid=0
+[Q4K-BY-CERT] request=2 stage=1 attempted=8 completed=6 exact_runs=6 target=8 clean=0 full_rows=8192 bit_checks=65536 first_mismatch=0 expected=0xbd804b76 actual=0x00000000 result=FAIL
+[Q4K-BY-GATE] request=2 correctness=0 median_1p10=0 trimmed_1p10=0 median_1p50=0 trimmed_1p50=0 p90_nonregression=0 bc_nonregression=0 cb_nonregression=0 order_gate=1 perf_carry=0 architecture_1p50=0 power_qualified=0 promoted=0
+[Q4K-BY-SUM] request=2 mask=0x1 root_proven=1 runs=11 failures=1 bit_checks=90112 perf_1p10=0 architecture_1p50=0 production=DUAL_WALKER_FLUSH promoted=0
+[Q4K-BY-STAGE] request=2 root_proven=1 correctness_mask=0x1 perf_1p10=0 architecture_1p50=0 power_qualified=0 promoted=0 next=COOPERATIVE_Q4_RECONSTRUCTION_REPAIR_QUALIFICATION
+[amp-diag] Inference loop cleared active request
+[amp] Enqueued CHAT prompt #3: "test" (queue depth: 1)
+[amp-diag] consume_prompt dequeued ID=3 len=0
+[amp] Processing request #3 (Chat): "test"
+[amp] Compute: prompt="test" max=128 temp=0.20
+[EU-AT-MODE] request=3 schedule=PRODUCTION requested_mode_id=6 requested_mode=ISSUE_OVERLAP active_mode_id=6 active_mode=ISSUE_OVERLAP candidate_certified=1 candidate_disabled=0 fallback_mode=WEIGHT_CURSOR response_path=LIVE_TRANSFORMER
+[Q6-AE-PREFLIGHT] workers=2 mailbox=PER_WORKER_GENERATION completed=1 clean=1 claim_mask=0x0 mailbox_mask=0x0 cycles=6070 claim_cycles=3480 timeout=250000000 legacy_before=0x0 legacy_after=0x0 repairs=0 retransmits=0 result=PASS
+[Q6-AE-PREFLIGHT-WORKERS] issued0=4423 claimed0=4423 completed0=4423 stage0=7 worker_epoch0=4423 issued1=4423 claimed1=4423 completed1=4423 stage1=7 worker_epoch1=4423
+[Q6-AE-REQUEST] request=3 active=1 mode=PINNED_MAILBOX_Q6 workers=2 preflight=PASS
+[PAIR-AI-MODE] request=3 schedule=PRODUCTION requested_mode_id=1 requested_mode=DUAL_WALKER_FLUSH q6_active=1 previous_mode_id=1 active_mode_id=1 active_mode=DUAL_WALKER_FLUSH armed=1 disabled=0
+[PAIR-AI-WINDOW-BEGIN] request=3 schedule=PRODUCTION mode_id=1 mode=DUAL_WALKER_FLUSH enabled=1 cert_before=1
+[Q4K-RESIDENT] ROUND18P INSTALL slot=1 arithmetic=FACTORED offset=0x14000 bytes=58688 capacity=114688
+[Q6-AE-LIVE] shape=512x2048 workers=2 completed=1 exact=1 clean=1 cycles=665264 claim_cycles=5784 reference_cycles=0 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=512x2048 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=4424 epoch1=4424 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[Q6-AE-LIVE] shape=2048x8192 workers=2 completed=1 exact=1 clean=1 cycles=12594786 claim_cycles=7024 reference_cycles=0 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=2048x8192 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=4425 epoch1=4425 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[Q6-AE-LIVE] shape=128256x2048 workers=2 completed=1 exact=1 clean=1 cycles=155441970 claim_cycles=3672 reference_cycles=0 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=128256x2048 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=4440 epoch1=4440 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[PROFILER] Token 1: Fwd=1.25B Attn=234.64M FFN=860.32M Norm=955.9K Alloc=30c Embed=21.2K LMH=154.31M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=26624 slots=1 installs=17 bytes=730832 switches=12 prod_switches=5 icache=12 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=26624 params=22321 dimk_transitions=4438 rp0=22321 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 25: Fwd=1.25B Attn=242.36M FFN=853.52M Norm=1.04M Alloc=32c Embed=15.3K LMH=154.56M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=29696 slots=1 installs=17 bytes=730832 switches=12 prod_switches=5 icache=12 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=29696 params=24881 dimk_transitions=4950 rp0=24881 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 50: Fwd=1.26B Attn=248.73M FFN=853.25M Norm=1.00M Alloc=34c Embed=16.0K LMH=155.17M Samp=0c
+[Q4K-STATE] ROUND18F sample=5120 dim_k=8192 -> 2048 logical_input_bytes=8192 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[PROFILER] Token 75: Fwd=1.27B Attn=254.05M FFN=860.49M Norm=966.1K Alloc=30c Embed=14.2K LMH=154.43M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=32768 slots=1 installs=17 bytes=730832 switches=12 prod_switches=5 icache=12 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=32768 params=27441 dimk_transitions=5462 rp0=27441 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 100: Fwd=1.27B Attn=263.24M FFN=854.68M Norm=946.7K Alloc=32c Embed=15.7K LMH=154.02M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=35840 slots=1 installs=17 bytes=730832 switches=12 prod_switches=5 icache=12 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=35840 params=30001 dimk_transitions=5974 rp0=30001 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[Q4K-STATE] ROUND18F sample=6144 dim_k=8192 -> 2048 logical_input_bytes=8192 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[PROFILER] Token 125: Fwd=1.28B Attn=283.75M FFN=843.98M Norm=976.1K Alloc=32c Embed=20.5K LMH=154.30M Samp=0c
+[PHASE-K] prompt_tokens=2 generated_tokens=128 prefill_cycles=2528034792 prefill_avg_cycles=1264017396 decode_cycles=162497630876 decode_avg_cycles=1269512741 prefill_share_x1000=15 decode_share_x1000=984 tsc_assumption_hz=2000000000
+[amp] Compute: done, 128 tokens generated
+[router] Dispatch stats: gpu=37440 cpu=6630 errors=0
+[router] === Hybrid Compute Router ===
+[router] Mode: GPU preferred
+[router] GPU available: yes
+[router] GPU dispatches: 37440
+[router] CPU dispatches: 6630
+[router] GPU errors (fallback): 0
+[CPU-GEMV-CENSUS] ===== routed CPU GEMV profile =====
+[CPU-GEMV-CENSUS] shape=512x2048 dtype_id=14 count=3120 total_cycles=2304141886 avg_cycles=738507 min_cycles=623756 max_cycles=10791128
+[CPU-GEMV-CENSUS] shape=2048x8192 dtype_id=14 count=3120 total_cycles=32811316752 avg_cycles=10516447 min_cycles=9370762 max_cycles=32936364
+[CPU-GEMV-CENSUS] shape=128256x2048 dtype_id=14 count=390 total_cycles=60572364264 avg_cycles=155313754 min_cycles=153636518 max_cycles=409702168
+[CPU-POLICY] ===== calibrated Q6_K worker policies =====
+[CPU-POLICY] no Q6_K policies calibrated
+[BOTTLENECK-P] scope=decode_only decode_cycles=162497630876 q4k_fence_cycles=121570292298 q4k_share_x1000=748 generated_tokens=128 q4k_cycles_per_token=949767908
+[BOTTLENECK-P-SHAPE] index=0 shape=2048x2048 dispatches=4096 cycles=22478957980 avg_fence_cycles=5488026 cycles_per_token=175616859 share_q4k_x1000=184 share_decode_x1000=138
+[BOTTLENECK-P-SHAPE] index=1 shape=512x2048 dispatches=3072 cycles=5503715176 avg_fence_cycles=1791573 cycles_per_token=42997774 share_q4k_x1000=45 share_decode_x1000=33
+[BOTTLENECK-P-SHAPE] index=2 shape=8192x2048 dispatches=4096 cycles=71872126524 avg_fence_cycles=17546905 cycles_per_token=561500988 share_q4k_x1000=591 share_decode_x1000=442
+[BOTTLENECK-P-SHAPE] index=3 shape=2048x8192 dispatches=1024 cycles=21715492618 avg_fence_cycles=21206535 cycles_per_token=169652286 share_q4k_x1000=178 share_decode_x1000=133
+[BOTTLENECK-AI-FOCUS] request=3 shape=8192x2048 logical_dispatches=4096 physical_pairs=2048 fence_cycles=71872126524 avg_per_logical=17546905 cycles_per_token=561500988 share_decode_x1000=442 rows=4 arithmetic=FACTORED pair=DUAL_WALKER_FLUSH transport=SFID[Q4K-P-SUM] device=0x9b41 certified_device=0x9b41 production_mode=FACTORED factored_armed=1 gate_ran=0 gate_passed=0 factored_disabled=0 failures=0 scalar_retries=0 slots=1 installs=17 switches=12 prod_switches=5 icache=12 hot_fallbacks=0
+[Q4K-P-SHAPE] index=0 shape=2048x2048 dispatches=12480 factored=12480 scalar=0 total_fence_cycles=68486467336 avg_fence_cycles=5487697
+[Q4K-P-SHAPE] index=1 shape=512x2048 dispatches=9360 factored=9360 scalar=0 total_fence_cycles=16770075420 avg_fence_cycles=1791674
+[Q4K-P-SHAPE] index=2 shape=8192x2048 dispatches=12480 factored=12480 scalar=0 total_fence_cycles=218979444466 avg_fence_cycles=17546429
+[Q4K-P-SHAPE] index=3 shape=2048x8192 dispatches=3120 factored=3120 scalar=0 total_fence_cycles=66164616356 avg_fence_cycles=21206607
+[Q6-AE-SUM] req=3 active=1 response=1 qualified=1 attempts=2210 completed=2210 fail=0 fallback=0 timeout=0 exact_fail=0 cert=0x7 disabled=0
+[Q6-AE-PERF] total_cycles=31641263944 avg_cycles=14317314 reference_cycles=0 next=PINNED_MAILBOX_Q6
+[POOL-AE-SUM] capacity=2 quant_dispatches=6630 mailbox_dispatches=6630 max_requested_workers=2 pool_poisoned=0 request_q6_pool=PINNED_MAILBOX_GENERATION parks=0
+[POOL-AE-EPOCH] started0=6633 completed0=6633 started1=6633 completed1=6633 preflight_runs=3 preflight_failures=0
+[POOL-AE-MAILBOX] issued0=6633 claimed0=6633 completed0=6633 issued1=6633 claimed1=6633 completed1=6633 mode=0 claim_retransmits=0 claim_timeouts=0 completion_timeouts=0 max_claim_cycles=453938
+[POOL-AE-DIAG] ticket_issued0=0 ticket_ack0=0 ticket_issued1=0 ticket_ack1=0 ticket_mismatches=0 legacy_repairs=0 wake_epoch=19903 wake_signals=19902
+[PAIR-AI-SUM] attempts=6240 completed=6240 failures=0 logical_gemvs=12480 cert_mask=0x1 cert_failures=0
+[PAIR-AI-IO] pair_submissions=6240 pair_fences=6240 gross_saved=6240 cert_ref_submissions=2 net_saved=6238
+[PAIR-AI-MODE-SUM] flush_attempts=6240 flush_completed=6240 compact_attempts=0 compact_completed=0
+[PAIR-AI-MODE-PERF] flush_avg_full=37286321 flush_avg_fence=35092859 compact_avg_full=0 compact_avg_fence=0 flush_cert=40976424 compact_cert=0
+[PAIR-AI-PERF] full=232666648032 avg_full=37286321 submit=91934788 avg_submit=14733 fence=218979444466 avg_fence=35092859
+[PAIR-AI-CERT-SUM] cert_mask=0x1 failures=0 reference=two_single_factored modes=FLUSH,COMPACT
+[PAIR-AI-WINDOW] request=3 mode_id=1 mode=DUAL_WALKER_FLUSH enabled=1 attempts=2080 completed=2080 failures=0 logical_gemvs=4160 cert_before=1 cert_after=1 cert_failures=0
+[PAIR-AI-IO-WINDOW] request=3 pair_submissions=2080 pair_fences=2080 gross_saved=2080 cert_ref_submissions=0 net_saved=2080
+[PAIR-AI-WINDOW-PERF] request=3 mode_id=1 full=77551486474 avg_full=37284368 submit=30433938 avg_submit=14631 fence=72995300730 avg_fence=35093894
+[PAIR-AI-SHAPE-WINDOW] request=3 mode_id=1 mode=DUAL_WALKER_FLUSH logical_dispatches=4160 physical_pairs=2080 fence_cycles=72995300730 avg_per_logical=17546947 avg_per_pair=35093894
+[PAIR-AI-ROUTER-WINDOW] request=3 mode_id=1 mode=DUAL_WALKER_FLUSH fallbacks=0 quarantines=0 disabled=0
+[PAIR-AI-ROUTER] active_mode_id=1 active_mode=DUAL_WALKER_FLUSH armed=1 disabled=0 fallbacks=0 quarantines=0 arm_events=1 mode_switches=1 schedule=PRODUCTION
+[EU-AT-WINDOW] request=3 mode_id=6 mode=ISSUE_OVERLAP enabled=1 attempts=2080 completed=2080 failures=0 logical_gemvs=4160 cert_before=1 cert_after=1 cert_ref_submissions=0
+[EU-AT-SUM] control_requests=0 candidate_requests=3 attempts=6240 completed=6240 failures=0 cert=1 cert_failures=0 cert_ref_submissions=2 disabled=0 promoted=1
+[PAIR-AI-STAGE] request=3 schedule=PRODUCTION pair_active=1 pair_now_armed=1 mode_id=1 mode=DUAL_WALKER_FLUSH q6_request_active=1 q6_qualified=1 q6_disabled=0 pair_disabled=0
+[Q4K-BY-LAB] request=3 stage=2 mode=REPAIRED_PATTERN_SWEEP skipped=1 required=0x3 mask=0x1
+[Q4K-BY-SUM] request=3 mask=0x1 root_proven=1 runs=11 failures=1 bit_checks=90112 perf_1p10=0 architecture_1p50=0 production=DUAL_WALKER_FLUSH promoted=0
+[Q4K-BY-STAGE] request=3 root_proven=1 correctness_mask=0x1 perf_1p10=0 architecture_1p50=0 power_qualified=0 promoted=0 next=COOPERATIVE_Q4_RECONSTRUCTION_REPAIR_QUALIFICATION
+[amp-diag] Inference loop cleared active request
+[amp] Enqueued CHAT prompt #4: "test" (queue depth: 1)
+[amp-diag] consume_prompt dequeued ID=4 len=0
+[amp] Processing request #4 (Chat): "test"
+[amp] Compute: prompt="test" max=128 temp=0.20
+[EU-AT-MODE] request=4 schedule=PRODUCTION requested_mode_id=6 requested_mode=ISSUE_OVERLAP active_mode_id=6 active_mode=ISSUE_OVERLAP candidate_certified=1 candidate_disabled=0 fallback_mode=WEIGHT_CURSOR response_path=LIVE_TRANSFORMER
+[Q6-AE-PREFLIGHT] workers=2 mailbox=PER_WORKER_GENERATION completed=1 clean=1 claim_mask=0x0 mailbox_mask=0x0 cycles=8528 claim_cycles=4956 timeout=250000000 legacy_before=0x0 legacy_after=0x0 repairs=0 retransmits=0 result=PASS
+[Q6-AE-PREFLIGHT-WORKERS] issued0=6634 claimed0=6634 completed0=6634 stage0=7 worker_epoch0=6634 issued1=6634 claimed1=6634 completed1=6634 stage1=7 worker_epoch1=6634
+[Q6-AE-REQUEST] request=4 active=1 mode=PINNED_MAILBOX_Q6 workers=2 preflight=PASS
+[PAIR-AI-MODE] request=4 schedule=PRODUCTION requested_mode_id=1 requested_mode=DUAL_WALKER_FLUSH q6_active=1 previous_mode_id=1 active_mode_id=1 active_mode=DUAL_WALKER_FLUSH armed=1 disabled=0
+[PAIR-AI-WINDOW-BEGIN] request=4 schedule=PRODUCTION mode_id=1 mode=DUAL_WALKER_FLUSH enabled=1 cert_before=1
+[Q4K-RESIDENT] ROUND18P INSTALL slot=1 arithmetic=FACTORED offset=0x14000 bytes=58688 capacity=114688
+[Q6-AE-LIVE] shape=512x2048 workers=2 completed=1 exact=1 clean=1 cycles=736348 claim_cycles=3804 reference_cycles=0 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=512x2048 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=6635 epoch1=6635 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[Q6-AE-LIVE] shape=2048x8192 workers=2 completed=1 exact=1 clean=1 cycles=10803042 claim_cycles=6572 reference_cycles=0 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=2048x8192 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=6636 epoch1=6636 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[Q6-AE-LIVE] shape=128256x2048 workers=2 completed=1 exact=1 clean=1 cycles=154819974 claim_cycles=2734 reference_cycles=0 cert_mask=0x7 request_path=PINNED_MAILBOX_PRODUCTION
+[Q6-AE-BOUNDARY] shape=128256x2048 claim_mask=0x0 mailbox_mask=0x0 legacy_before=0x0 legacy_after=0x0 repairs=0 epoch0=6651 epoch1=6651 retransmits=0 staging=BOOT_LIFETIME bounded=1 pinned=1 mailbox=PER_WORKER_GENERATION
+[PROFILER] Token 1: Fwd=1.24B Attn=235.80M FFN=851.13M Norm=1.02M Alloc=30c Embed=15.5K LMH=155.99M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=38912 slots=1 installs=18 bytes=789520 switches=13 prod_switches=6 icache=13 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=38912 params=32561 dimk_transitions=6486 rp0=32561 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 25: Fwd=1.25B Attn=239.68M FFN=855.78M Norm=906.4K Alloc=32c Embed=15.7K LMH=154.45M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=41984 slots=1 installs=18 bytes=789520 switches=13 prod_switches=6 icache=13 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=41984 params=35121 dimk_transitions=6998 rp0=35121 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 50: Fwd=1.25B Attn=247.93M FFN=851.09M Norm=899.3K Alloc=32c Embed=35.1K LMH=154.28M Samp=0c
+[Q4K-STATE] ROUND18F sample=7168 dim_k=8192 -> 2048 logical_input_bytes=8192 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[PROFILER] Token 75: Fwd=1.27B Attn=253.83M FFN=859.30M Norm=1.12M Alloc=34c Embed=13.6K LMH=153.82M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=45056 slots=1 installs=18 bytes=789520 switches=13 prod_switches=6 icache=13 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=45056 params=37681 dimk_transitions=7510 rp0=37681 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[PROFILER] Token 100: Fwd=1.27B Attn=261.06M FFN=857.84M Norm=1.09M Alloc=34c Embed=15.8K LMH=154.30M Samp=0c
+[Q4K-RESIDENT-A] ROUND18O sample=48128 slots=1 installs=18 bytes=789520 switches=13 prod_switches=6 icache=13 hot_fallbacks=0
+[Q4K-RESIDENT-B] ROUND18O sample=48128 params=40241 dimk_transitions=8022 rp0=40241 active_dim_k=2048 active_rows=1 active_arithmetic=1 active_offset=0x14000
+[Q4K-STATE] ROUND18F sample=8192 dim_k=8192 -> 2048 logical_input_bytes=8192 input_surface_bytes=32768 metadata_rebuild=0 calibration=0
+[PROFILER] Token 125: Fwd=1.28B Attn=283.05M FFN=844.86M Norm=954.6K Alloc=34c Embed=18.5K LMH=154.34M Samp=0c
+[PHASE-K] prompt_tokens=2 generated_tokens=128 prefill_cycles=2515670678 prefill_avg_cycles=1257835339 decode_cycles=162475969514 decode_avg_cycles=1269343511 prefill_share_x1000=15 decode_share_x1000=984 tsc_assumption_hz=2000000000
+[amp] Compute: done, 128 tokens generated
+[router] Dispatch stats: gpu=49920 cpu=8840 errors=0
+[router] === Hybrid Compute Router ===
+[router] Mode: GPU preferred
+[router] GPU available: yes
+[router] GPU dispatches: 49920
+[router] CPU dispatches: 8840
+[router] GPU errors (fallback): 0
+[CPU-GEMV-CENSUS] ===== routed CPU GEMV profile =====
+[CPU-GEMV-CENSUS] shape=512x2048 dtype_id=14 count=4160 total_cycles=3073361622 avg_cycles=738788 min_cycles=623756 max_cycles=10791128
+[CPU-GEMV-CENSUS] shape=2048x8192 dtype_id=14 count=4160 total_cycles=43736952852 avg_cycles=10513690 min_cycles=9370762 max_cycles=32936364
+[CPU-GEMV-CENSUS] shape=128256x2048 dtype_id=14 count=520 total_cycles=80682589978 avg_cycles=155158826 min_cycles=153636518 max_cycles=409702168
+[CPU-POLICY] ===== calibrated Q6_K worker policies =====
+[CPU-POLICY] no Q6_K policies calibrated
+[BOTTLENECK-P] scope=decode_only decode_cycles=162475969514 q4k_fence_cycles=121553872842 q4k_share_x1000=748 generated_tokens=128 q4k_cycles_per_token=949639631
+[BOTTLENECK-P-SHAPE] index=0 shape=2048x2048 dispatches=4096 cycles=22471591380 avg_fence_cycles=5486228 cycles_per_token=175559307 share_q4k_x1000=184 share_decode_x1000=138
+[BOTTLENECK-P-SHAPE] index=1 shape=512x2048 dispatches=3072 cycles=5502040286 avg_fence_cycles=1791028 cycles_per_token=42984689 share_q4k_x1000=45 share_decode_x1000=33
+[BOTTLENECK-P-SHAPE] index=2 shape=8192x2048 dispatches=4096 cycles=71866874134 avg_fence_cycles=17545623 cycles_per_token=561459954 share_q4k_x1000=591 share_decode_x1000=442
+[BOTTLENECK-P-SHAPE] index=3 shape=2048x8192 dispatches=1024 cycles=21713367042 avg_fence_cycles=21204460 cycles_per_token=169635680 share_q4k_x1000=178 share_decode_x1000=133
+[BOTTLENECK-AI-FOCUS] request=4 shape=8192x2048 logical_dispatches=4096 physical_pairs=2048 fence_cycles=71866874134 avg_per_logical=17545623 cycles_per_token=561459954 share_decode_x1000=442 rows=4 arithmetic=FACTORED pair=DUAL_WALKER_FLUSH transport=SFID[Q4K-P-SUM] device=0x9b41 certified_device=0x9b41 production_mode=FACTORED factored_armed=1 gate_ran=0 gate_passed=0 factored_disabled=0 failures=0 scalar_retries=0 slots=1 installs=18 switches=13 prod_switches=6 icache=13 hot_fallbacks=0
+[Q4K-P-SHAPE] index=0 shape=2048x2048 dispatches=16640 factored=16640 scalar=0 total_fence_cycles=91309734744 avg_fence_cycles=5487363
+[Q4K-P-SHAPE] index=1 shape=512x2048 dispatches=12480 factored=12480 scalar=0 total_fence_cycles=22358783696 avg_fence_cycles=1791569
+[Q4K-P-SHAPE] index=2 shape=8192x2048 dispatches=16640 factored=16640 scalar=0 total_fence_cycles=291968762078 avg_fence_cycles=17546199
+[Q4K-P-SHAPE] index=3 shape=2048x8192 dispatches=4160 factored=4160 scalar=0 total_fence_cycles=88217104948 avg_fence_cycles=21206034
+[Q6-AE-SUM] req=4 active=1 response=1 qualified=1 attempts=2210 completed=2210 fail=0 fallback=0 timeout=0 exact_fail=0 cert=0x7 disabled=0
+[Q6-AE-PERF] total_cycles=31633593508 avg_cycles=14313843 reference_cycles=0 next=PINNED_MAILBOX_Q6
+[POOL-AE-SUM] capacity=2 quant_dispatches=8840 mailbox_dispatches=8840 max_requested_workers=2 pool_poisoned=0 request_q6_pool=PINNED_MAILBOX_GENERATION parks=0
+[POOL-AE-EPOCH] started0=8844 completed0=8844 started1=8844 completed1=8844 preflight_runs=4 preflight_failures=0
+[POOL-AE-MAILBOX] issued0=8844 claimed0=8844 completed0=8844 issued1=8844 claimed1=8844 completed1=8844 mode=0 claim_retransmits=0 claim_timeouts=0 completion_timeouts=0 max_claim_cycles=649514
+[POOL-AE-DIAG] ticket_issued0=0 ticket_ack0=0 ticket_issued1=0 ticket_ack1=0 ticket_mismatches=0 legacy_repairs=0 wake_epoch=26537 wake_signals=26536
+[PAIR-AI-SUM] attempts=8320 completed=8320 failures=0 logical_gemvs=16640 cert_mask=0x1 cert_failures=0
+[PAIR-AI-IO] pair_submissions=8320 pair_fences=8320 gross_saved=8320 cert_ref_submissions=2 net_saved=8318
+[PAIR-AI-MODE-SUM] flush_attempts=8320 flush_completed=8320 compact_attempts=0 compact_completed=0
+[PAIR-AI-MODE-PERF] flush_avg_full=37283805 flush_avg_fence=35092399 compact_avg_full=0 compact_avg_fence=0 flush_cert=40976424 compact_cert=0
+[PAIR-AI-PERF] full=310201257604 avg_full=37283805 submit=121675206 avg_submit=14624 fence=291968762078 avg_fence=35092399
+[PAIR-AI-CERT-SUM] cert_mask=0x1 failures=0 reference=two_single_factored modes=FLUSH,COMPACT
+[PAIR-AI-WINDOW] request=4 mode_id=1 mode=DUAL_WALKER_FLUSH enabled=1 attempts=2080 completed=2080 failures=0 logical_gemvs=4160 cert_before=1 cert_after=1 cert_failures=0
+[PAIR-AI-IO-WINDOW] request=4 pair_submissions=2080 pair_fences=2080 gross_saved=2080 cert_ref_submissions=0 net_saved=2080
+[PAIR-AI-WINDOW-PERF] request=4 mode_id=1 full=77534609572 avg_full=37276254 submit=29740418 avg_submit=14298 fence=72989317612 avg_fence=35091018
+[PAIR-AI-SHAPE-WINDOW] request=4 mode_id=1 mode=DUAL_WALKER_FLUSH logical_dispatches=4160 physical_pairs=2080 fence_cycles=72989317612 avg_per_logical=17545509 avg_per_pair=35091018
+[PAIR-AI-ROUTER-WINDOW] request=4 mode_id=1 mode=DUAL_WALKER_FLUSH fallbacks=0 quarantines=0 disabled=0
+[PAIR-AI-ROUTER] active_mode_id=1 active_mode=DUAL_WALKER_FLUSH armed=1 disabled=0 fallbacks=0 quarantines=0 arm_events=1 mode_switches=1 schedule=PRODUCTION
+[EU-AT-WINDOW] request=4 mode_id=6 mode=ISSUE_OVERLAP enabled=1 attempts=2080 completed=2080 failures=0 logical_gemvs=4160 cert_before=1 cert_after=1 cert_ref_submissions=0
+[EU-AT-SUM] control_requests=0 candidate_requests=4 attempts=8320 completed=8320 failures=0 cert=1 cert_failures=0 cert_ref_submissions=2 disabled=0 promoted=1
+[PAIR-AI-STAGE] request=4 schedule=PRODUCTION pair_active=1 pair_now_armed=1 mode_id=1 mode=DUAL_WALKER_FLUSH q6_request_active=1 q6_qualified=1 q6_disabled=0 pair_disabled=0
+[Q4K-BY-LAB] request=4 stage=3 mode=REPAIRED_ENDURANCE_PERFORMANCE skipped=1 required=0x7 mask=0x1
+[Q4K-BY-SUM] request=4 mask=0x1 root_proven=1 runs=11 failures=1 bit_checks=90112 perf_1p10=0 architecture_1p50=0 production=DUAL_WALKER_FLUSH promoted=0
+[Q4K-BY-STAGE] request=4 root_proven=1 correctness_mask=0x1 perf_1p10=0 architecture_1p50=0 power_qualified=0 promoted=0 next=COOPERATIVE_Q4_RECONSTRUCTION_REPAIR_QUALIFICATION
+[amp-diag] Inference loop cleared active request
+[obsidian] click: Terminal
+[terminal] Log export to USB requested...
+
+=== END OF LOG ===
