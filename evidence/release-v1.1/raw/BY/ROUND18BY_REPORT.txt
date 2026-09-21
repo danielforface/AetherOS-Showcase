@@ -1,0 +1,60 @@
+ROUND18BY COOPERATIVE Q4 SLM RECONSTRUCTION WRITE-FOOTPRINT REPAIR BUILD SUCCESS
+Generated: 2026-08-09T13:04:59.6400875+03:00
+Entry source state: ALL_BX
+
+PREDECESSOR ROUND18BX
+intel.rs: 69183078DF702C340552E4AE73A381162E71095B0F3549B0F03A64CDE093CBF5
+router.rs: 3B3F7C3904E961BAE5AE5D28713ABEFE9D0AA00421EC216FB01831DE8618AE5E
+transformer.rs: FA5BE031425CCD9781B72D709F853B7BA10C0CDC77F6DC8FC312932C0013F1FA
+main.rs: 5CC8E0EE68A85204E280138FDFE152D6FD19EF20144013BF9BB0E996EF8C4889
+amp.rs: 6B7D4F510E6D8F9DEAF679818BF4D013A7FC69125A551E688E53D21C5DD5C712
+pool.rs: 45DA49D22FE66E8746F47C17CAB837BD91F3602975E5292514BF921ACE85A3F3
+attention.rs: 2912A5FEC16DAD6926615B887C8D6C8EFBA17D3417C560DFFB1C5B13BBDD3FB0
+kernel: FB29D8F999C28EE2694789349687C2D3B1A00B10400348539F972705F9F47B68
+
+PATCHED ROUND18BY
+intel.rs: FB1F64151B061AA19F1D1555D2B140300F30132142B0A06DFEE5257B7F9EA60F
+router.rs: 3B3F7C3904E961BAE5AE5D28713ABEFE9D0AA00421EC216FB01831DE8618AE5E
+transformer.rs: FA5BE031425CCD9781B72D709F853B7BA10C0CDC77F6DC8FC312932C0013F1FA
+main.rs: 4661EA0A36765A962FE8D5942D48648D8795248592A329C923E3674F33FFB633
+amp.rs: 2D1AFFA46E0D3F36F18625353C18E6C16975696D1FEB2FD61EA72A8B21E7C821
+pool.rs: 45DA49D22FE66E8746F47C17CAB837BD91F3602975E5292514BF921ACE85A3F3
+attention.rs: 2912A5FEC16DAD6926615B887C8D6C8EFBA17D3417C560DFFB1C5B13BBDD3FB0
+
+CONTRACT
+- BX reproduced the cooperative SLM+ROTATE4 failure twice and all six scoreboard/delay/retirement probes remained incorrect while clean; that branch is closed.
+- BY repairs only the SLM reconstruction write footprint: the canonical two four-DWord copy loops now use emit_mov_grf_ud_scalar_exact; global emit_mov_grf_scalar broadcast semantics are unchanged.
+- Request 1 proves causality in hardware: unsafe reconstruction must destroy r110 sentinel into tile[255], exact reconstruction must preserve it, unsafe full output must show exactly 2048 row%4==0 mismatches, and repaired full output must be 8192/8192 bit-exact.
+- Only the complete footprint+bitmap+fixed signature sets root_proven=1 and unlocks Requests 2/3/4.
+- Requests 2/3/4 qualify the repaired full kernel on Gate+Up, eight deterministic activation patterns, and 32-pair alternating endurance/performance.
+- Every candidate run requires full 8192-row bit equality plus guard/L3/fault/recovery cleanliness.
+- perf carry remains >=1.10x median+trim; architecture signal remains >=1.50x. power_qualified=0 and promoted=0 unconditionally.
+
+BUILD
+Command: cargo +nightly-x86_64-pc-windows-gnu build --locked --offline --release --target x86_64-unknown-none --manifest-path D:\CODE\rustOs\kernel\Cargo.toml --features experimental-compute-pool --message-format=short
+Exit: 0
+Warnings recorded: 1273
+Cargo: cargo 1.99.0-nightly (3efb1f477 2026-07-17)
+Rustc: rustc 1.99.0-nightly (dc3f85158 2026-07-26) | binary: rustc | commit-hash: dc3f85158a955a87a6e4363af1fbe9cf2d063cce | commit-date: 2026-07-26 | host: x86_64-pc-windows-gnu | release: 1.99.0-nightly | LLVM version: 22.1.8
+Kernel size: 4924392
+Kernel SHA256: 2843D828C52814E27A874F5519DB5D6CE44C2EDE6FFB1E52B9FF12B54D1979CD
+
+USB DEPLOYMENT
+Model: SanDisk Cruzer Blade
+Disk serial: 03036621022521015400
+Volume serial: 7E4DF325
+Volume GUID: \\?\Volume{1d98f549-88f4-11f1-a311-105bad080fd2}\
+Filesystem/health/dirty: FAT32 / Healthy / False
+Staged temp + Flush(true) + hash readback + same-volume rename: PASS
+Release=USB: MATCH
+Rollback: E:\boot\kernel.round18bx.rollback
+Rollback SHA256: FB29D8F999C28EE2694789349687C2D3B1A00B10400348539F972705F9F47B68
+
+HARDWARE TEST
+Keep AC physically connected. Perform one cold boot.
+Run four identical prompts: test, 128 tokens, without reboot or ANY router/model/settings change.
+Do not run a fifth request before copying evidence.
+Return E:\\AETHLOG.TXT, this report and MANIFEST_SHA256.txt.
+Request 1 terminal evidence must include two [Q4K-BY-FOOTPRINT] lines, two [Q4K-BY-BITMAP] lines, [Q4K-BY-CAUSAL], and [Q4K-BY-STAGE].
+root_proven=1 requires the exact sentinel and row%4 signature plus repaired 8192/8192 equality; otherwise Requests 2-4 must gate off.
+Request 4 should reach correctness_mask=0xf only after exact endurance; promoted=0 always.

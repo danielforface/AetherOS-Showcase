@@ -1,0 +1,13 @@
+ROUND18BY SOURCE FINDINGS
+
+Verified against the exact Round18BX source used as this package baseline.
+
+1. emit_mov_grf_scalar is not SIMD1. Its own source comment states that it is a SIMD8 broadcast and that dst_sub>0 wraps into the next GRF.
+2. The pre-BY round18be_emit_slm_tile_to_input_grfs used emit_mov_grf_scalar in both four-lane copy loops.
+3. On the final high GRF r109, lane=3 begins at r109.3 and the SIMD8 destination footprint reaches r110.0..2. The final source value is r32.7, corresponding to tile[255].
+4. r110.0 is the active ROTATE4 accumulator and is initialized once before the eight-K-tile loop. It must remain live across tiles.
+5. BV SLM+BS reloads scratch r110.0 from r120..r123 immediately before row arithmetic; historical BE reloads its partial accumulator after reconstruction. Both therefore mask the escaping reconstruction write.
+6. BX reproduced the same row-0 failure twice and all six delay/retirement variants failed, which is consistent with deterministic register overwrite rather than timing.
+7. The Q4 arithmetic consumes the reconstructed input through vector operations followed by emit_horizontal_sum_4lane. The four low DWORDs reconstructed by the exact SIMD1 helper are the architecturally consumed lanes; lanes 4..7 are not part of that reduction.
+8. Round18BY changes no global semantics of emit_mov_grf_scalar. Only the canonical SLM reconstruction helper uses emit_mov_grf_ud_scalar_exact for its two four-DWord copy loops.
+9. A frozen unsafe reconstruction helper exists only inside the BY causal laboratory so the physical hardware can prove the old footprint and row%4 mismatch signature in the same boot.
